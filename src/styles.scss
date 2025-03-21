@@ -1,0 +1,110 @@
+/* You can add global styles to this file, and also import other style files */
+@use "./assets/styles/responsive.scss" as m;
+@import "./assets/styles/fonts.scss";
+@import "./assets/styles/base.scss";
+
+body {
+  overflow: hidden;
+  margin: 0;
+  // padding-top: 121px;
+
+  &.hideSCroll {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 300;
+      background-color: #424242;
+      width: 17px;
+      height: 100vh
+    }
+  }
+
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  height: 44px;
+  padding: 0 25px;
+  border-radius: 45px;
+  display: flex;
+  align-items: center;
+
+  @include m.respond-to(small) {
+    font-size: 12px;
+    padding: 0 20px;
+  }
+
+  &.btn-secondary {
+    border: 0.5px solid #484848;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: rgba(48, 48, 48, 0.1);
+      transition: 0.3s;
+    }
+  }
+
+  &.dark-btn {
+    color: white;
+    border: 0.33px solid #838383;
+    background-color: #1a1a1a;
+    transition: 0.3s;
+
+    .point {
+      background-color: #591e7f;
+      width: 9px;
+      height: 9px;
+      border-radius: 100%;
+      // margin-top: 8px;
+      margin-right: 8px;
+    }
+
+    &:hover {
+      background-color: #757575;
+    }
+  }
+
+  &.see__more {
+    background-color: #b80e45;
+    color: white;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+
+  &.md {
+    height: 30px;
+  }
+}
+
+.h-100 {
+  min-height: 100vh;
+}
+
+.center {
+  display: flex;
+
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h2 {
+  font-size: 20px;
+  color: #000000;
+  padding-bottom: 22px;
+}

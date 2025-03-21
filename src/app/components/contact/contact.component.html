@@ -1,0 +1,71 @@
+<section class="contact__section center flex-col">
+    <div class="up__side soc__content flex w-full items-start">
+        <h3 class="__title helvetica-medium">{{translate.getTranslation(($data | async)?.contact?.contact_section_title)}}</h3>
+        <div class="social__side flex">
+            <span class="__location helvetica-roman">{{translate.getTranslation(($data | async)?.contact?.location)}}</span>
+            <div class="__socials helvetica-roman __black">
+                <div class="social__items">
+                    <span class="__up">[{{translate.getTranslation(($data | async)?.contact?.address)}}]</span>
+                    <span class="__down">[{{translate.getTranslation(($data | async)?.contact?.address)}}]</span>
+                </div>
+                <div class="social__items">
+                    <span class="__up">[{{($data | async)?.contact?.phone}}]</span>
+                    <span class="__down">[{{($data | async)?.contact?.phone}}]</span>
+                </div>
+                <!-- <div class="social__items">
+                    <span class="__up">[321234131313]</span>
+                    <span class="__down">[321234131313]</span>
+                </div> -->
+                <div class="social__items">
+                    <span class="__up">[{{($data | async)?.contact?.email}}]</span>
+                    <span class="__down">[{{($data | async)?.contact?.email}}]</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="down__side soc__content flex w-full items-start">
+        <h3 class="__title helvetica-medium">{{translate.getTranslation(($data | async)?.social?.social_section_title)}}</h3>
+        <div class="social__side flex">
+            <span class="__location helvetica-roman">{{translate.getTranslation(($data | async)?.social?.social_section_label)}}</span>
+            <div class="__socials helvetica-roman">
+                <div class="social__items">
+                    <a class="__up" target="_blank" [href]="($data | async)?.social?.facebook">
+                        [Facebook]
+                    </a>
+                    <a class="__down" target="_blank" [href]="($data | async)?.social?.facebook">
+                        [Facebook]
+                    </a>
+                </div>
+                <div class="social__items">
+                    <a class="__up" target="_blank" [href]="($data | async)?.social?.instagram">
+                        [Instagram]
+                    </a>
+                    <a class="__down" target="_blank" [href]="($data | async)?.social?.instagram">
+                        [Instagram]
+                    </a>
+                </div>
+                <div class="social__items">
+                    <a class="__up" target="_blank" [href]="($data | async)?.social?.youtube">
+                        [Youtube]
+                    </a>
+                    <a class="__down" target="_blank" [href]="($data | async)?.social?.youtube">
+                        [Youtube]
+                    </a>
+                </div>
+                <div class="social__items">
+                    <a class="__up" target="_blank" [href]="($data | async)?.social?.linkedin">
+                        [Linkedin]
+                    </a>
+                    <a class="__down" target="_blank" [href]="($data | async)?.social?.linkedin">
+                        [Linkedin]
+                    </a>
+                </div>
+                <!-- <div class="social__items">
+                    <span class="__up">[+995 133 123 221]</span>
+                    <span class="__down">[+995 133 123 221]</span>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>

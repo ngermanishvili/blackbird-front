@@ -1,0 +1,56 @@
+@use "../../../../../assets/styles/responsive.scss" as m;
+
+
+
+.check__section {
+    max-width: 930px;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-block: 40px;
+
+    @include m.respond-to(small) {
+        justify-content: initial;
+        min-height: initial !important;
+    }
+
+    @include m.respond-to(xlarge) {
+        padding-inline: 20px;
+    }
+
+    .blocks {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        @include m.respond-to(small) {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+
+        }
+    }
+
+    .__topside {
+        margin-bottom: 60px;
+        display: flex;
+        flex-direction: column;
+
+        .__title {
+            font-size: 36px;
+            color: #767676;
+            line-height: 43px;
+            letter-spacing: 0.32px;
+
+            strong {
+                color: black;
+                font-weight: 400;
+            }
+        }
+
+        .__text {
+            font-size: 16px;
+            color: #767676;
+
+        }
+    }
+}

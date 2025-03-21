@@ -1,0 +1,109 @@
+<section class="success-cases">
+  <div class="center">
+    <div class="w-full">
+      <div class="top__side">
+        <h1 class="__title helvetica-roman pb-0">
+          Success <strong>Cases</strong>
+        </h1>
+        <ul class="cases__filters">
+          <li
+            (click)="onClickFilter()"
+            [ngClass]="{ active: activeFilter === 'all' }"
+            class="__list active helvetica-light"
+          >
+            {{ translateService.getTranslation(service?.langStrings?.all) }}
+          </li>
+          <li
+            (click)="onClickFilter(item)"
+            [ngClass]="{ active: activeFilter === item.slug }"
+            *ngFor="let item of ($services | async).data"
+            class="__list helvetica-light"
+          >
+            {{ translateService.getTranslation(item?.title) }}
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="cases__list flex gap-x-16 cursor-pointer"
+        *ngFor="let item of succeses?.data"
+      >
+        <div
+          class="__left w-full cursor-pointer"
+          [routerLink]="[
+            '/success-case',
+            item?.id,
+            translateService.currentLang()
+          ]"
+        >
+          <img
+            class="w-full object-cover grayscale ray case__img ease-in duration-300"
+            [src]="item?.main_image"
+            alt=""
+          />
+        </div>
+
+        <div class="__right w-full">
+          <div
+            class="__top flex justify-between w-full"
+            [routerLink]="[
+              '/success-case',
+              item?.id,
+              translateService.currentLang()
+            ]"
+          >
+            <div class="flex">
+              <h2
+                class="__text __number mr-2 helvetica-roman pb-0 cursor-pointer ease-in duration-300"
+              >
+                {{ item.id > 8 ? "" : "0" }}{{ item.id }}
+              </h2>
+              <h2 class="__text helvetica-roman pb-0 cursor-pointer">
+                {{ translateService.getTranslation(item?.title) }}
+              </h2>
+            </div>
+            <div class="__view flex items-center helvetica-light">
+              {{
+                translateService.getTranslation(service?.langStrings?.view) ??
+                  "view"
+              }}
+              <svg
+                class="arrow__img ease-in duration-300"
+                width="19"
+                height="19"
+                viewBox="0 0 19 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4.69171 9.5L15.1917 9.5"
+                  stroke="#838383"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9.94171 4.25L15.1917 9.5L9.94171 14.75"
+                  stroke="#838383"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span class="__row"></span>
+            </div>
+          </div>
+          <p class="__subtext helvetica-light mb-0">
+            {{ translateService.getTranslation(item?.short_description) }}
+          </p>
+        </div>
+      </div>
+      @if (succeses?.total > 10) {
+      <div class="pagination flex justify-center my-16">
+        <app-pagination
+          [paginationData]="succeses"
+          (pageChange)="onPageChange($event)"
+        ></app-pagination>
+      </div>
+      }
+    </div>
+  </div>
+</section>

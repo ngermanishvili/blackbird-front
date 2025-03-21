@@ -1,0 +1,90 @@
+<div class="services__content">
+  <ul class="services__nav center ss:hidden md:flex">
+    @for ( item of services; track item.slug ) {
+    <li class="services__list helvetica-light">
+      <a
+        [routerLink]="[
+          '/services',
+          item?.slug,
+          item.id,
+          translate.currentLang()
+        ]"
+        routerLinkActive="bg__{{ item?.slug }} br__{{ item?.slug }} active"
+        >{{ translate.getTranslation(item?.title) }}</a
+      >
+    </li>
+    }
+  </ul>
+  @if (exactService?.id) {
+  <app-service-item [data]="exactService"></app-service-item>
+  } @if (loaded && exactService?.whats_included?.section_visibility) { @if
+  (style) {
+  <div class="relative">
+    <div class="what__included" [ngClass]="{ dark: !style }">
+      <div class="what__included-block center items-center">
+        <div class="color__circle bg__{{ exactService?.slug }}"></div>
+        <div class="helvetica-light sub__text">
+          {{
+            translate.getTranslation(
+              exactService?.whats_included?.section_main_title
+            )
+          }}
+        </div>
+      </div>
+    </div>
+    <div class="service-items">
+      @for (item of exactService?.whats_included?.items; track $index) {
+      <app-service-page-item
+        [data]="item"
+        [elementTop]="initialTopGap"
+        appTrackSectionScroll
+        [scrollThresholdTop]="50"
+        [scrollThresholdBottom]="initialBottomGap"
+        activeClass="highlight"
+      ></app-service-page-item>
+      }
+    </div>
+  </div>
+  }@else {
+  <div class="relative">
+    <div class="what__included dark">
+      <div class="what__included-block center items-center">
+        <div class="color__circle bg__{{ exactService?.slug }}"></div>
+        <div class="helvetica-light sub__text">
+          {{
+            translate.getTranslation(
+              exactService?.whats_included?.section_main_title
+            )
+          }}
+        </div>
+      </div>
+    </div>
+    <app-hard-scroll
+      [data]="exactService?.whats_included?.items"
+    ></app-hard-scroll>
+  </div>
+  } } @if (exactService?.partners?.section_visibility) {
+  <div class="relative z-50">
+    <app-logos [data]="exactService?.partners?.items"></app-logos>
+  </div>
+  } @if (exactService?.team?.section_visibility && serviceLoade) {
+  <app-wizards
+    [data]="exactService?.team?.items"
+    [dataCopy]="exactService?.team?.items"
+    [title]="translate.getTranslation(exactService?.team?.section_title)"
+  ></app-wizards>
+  }
+  <div class="some__block">
+    <app-hover-block [data]="exactService?.case_studies"></app-hover-block>
+  </div>
+
+  <app-also-check
+    [data]="exactService?.related?.items"
+    [titleData]="exactService?.related"
+  ></app-also-check>
+  <!-- @if(!loaded) {
+<div class="loader">
+    <img src="../../../../assets/img/gifs/loader.gif">
+</div>
+} -->
+</div>

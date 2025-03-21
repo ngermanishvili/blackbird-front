@@ -1,0 +1,134 @@
+<section class="about-inner">
+    <div class="center flex-col">
+        <div>
+            <a class="head__title flex items-center cursor-pointer helvetica-light uppercase"
+                [routerLink]="['/about' , translate.currentLang()]">
+                <img class="block mr-3" src="../../../../assets/img/back.svg" alt="">
+                BACK
+            </a>
+            <h1 class="sec__title couturier-Regular"
+                [innerHtml]="($data | async)?.data?.intro[translate.currentLang()]?.title">
+
+            </h1>
+        </div>
+        <div class="brand__blocks">
+            <div class="__left">
+                <h2 class="__title helvetica-roman pb-0">
+                    {{($data | async)?.data?.intro[translate.currentLang()]?.symbol?.title}}
+                </h2>
+                <div class="__text helvetica-light"
+                    [innerHTML]="($data | async)?.data?.intro[translate.currentLang()]?.symbol?.content">
+                </div>
+            </div>
+            <div class="__right">
+                <img [src]="translate.img + ($data | async)?.data?.intro[translate.currentLang()]?.symbol?.image"
+                    alt="">
+            </div>
+        </div>
+        <div class="brand__blocks">
+            <div class="__left">
+                <h2 class="__title helvetica-roman pb-0">
+                    {{($data | async)?.data?.intro[translate.currentLang()]?.logotype?.title}}
+                </h2>
+                <div class="__text helvetica-light"
+                    [innerHTML]="($data | async)?.data?.intro[translate.currentLang()]?.logotype?.content">
+                </div>
+            </div>
+            <div class="__right">
+                <img [src]="translate.img + ($data | async)?.data?.intro[translate.currentLang()]?.logotype?.image"
+                    alt="">
+            </div>
+        </div>
+    </div>
+    <section class="brand-sec">
+        <div class="center flex-col">
+            <h2 class="__title helvetica-roman pb-0">
+                {{($data |async)?.data?.elements[translate.currentLang()]?.title}}
+            </h2>
+            <div class="flex justify-between items-start flex-col lg:flex-row lg:items-end">
+                <div class="__left">
+                    <div class="birds__selection scrollbar">
+                        <div class="list__item" *ngFor="let item of ($data |async)?.services"
+                            [ngClass]="{'active': activeBird?.slug === item?.slug}" (click)="activeItem(item)">
+                            <div class="__list" [ngStyle]="getStyles(item)"></div>
+                            <h2 class="__text block helvetica-roman pb-0">
+                                {{translate.getTranslation(activeBird?.title)}}</h2>
+                        </div>
+                    </div>
+
+                    <div class="__subText helvetica-light"
+                        [innerHTML]="translate.getTranslation(activeBird?.branding_content)">
+                    </div>
+                </div>
+
+                <div class="big__img">
+                    <img src="{{activeBird?.branding_image}}" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="colors_sec">
+        <div class="">
+            <div class="top__side center">
+                <h2 class="__title helvetica-roman">{{($data | async)?.data?.color[translate.currentLang()]?.title}}
+                </h2>
+                <div class="__text helvetica-light">{{($data | async)?.data?.color[translate.currentLang()]?.content}}
+                </div>
+            </div>
+            <div class="colors__block">
+                <div class="__list __list-{{i}}"
+                    *ngFor="let item of ($data | async)?.data?.color[translate.currentLang()]?.colors; let i = index"
+                    [ngStyle]="{'background-color': item.color}">
+                    <h3 class="__text helvetica-roman">{{item.title}}</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="rotate__block __black overflow-hidden">
+        <div class="center flex-col">
+            <div class="top__side flex items-center">
+                <h2 class="__left helvetica-roman pb-0">{{($data |
+                    async)?.data?.typography[translate.currentLang()]?.title}}</h2>
+                <span class="flex w-full justify-end __right helvetica-thin small__text">{{($data |
+                    async)?.data?.typography[translate.currentLang()]?.font_name}}</span>
+            </div>
+            <div class="rotated__effect items-center">
+                <span class="rot__text __black helvetica-ultra-light">{{($data |
+                    async)?.data?.typography[translate.currentLang()]?.display_title}}</span>
+                <div class="flex flex-col">
+                    <h3 class="main__text __black couturier-Regular pb-0">{{($data |
+                        async)?.data?.typography[translate.currentLang()]?.display_text}}</h3>
+                    <h3 class="main__text __black __sec couturier-Regular pb-0">{{($data |
+                        async)?.data?.typography[translate.currentLang()]?.display_text}}</h3>
+                    <h3 class="main__text __black __thr couturier-Regular pb-0">{{($data |
+                        async)?.data?.typography[translate.currentLang()]?.display_text}}</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="rotate__block overflow-hidden">
+        <div class="center flex-col">
+            <span class="flex w-full justify-end helvetica-thin small__text">
+                {{($data |async)?.data?.font[translate.currentLang()]?.title}}</span>
+            <div class="rotated__effect">
+                <span class="rot__text helvetica-ultra-light">{{($data
+                    |async)?.data?.font[translate.currentLang()]?.display_title}}</span>
+                <h3 class="main__text helvetica-ultra-light pb-0">{{($data
+                    |async)?.data?.font[translate.currentLang()]?.display_text}}</h3>
+            </div>
+        </div>
+    </section>
+    <section class="also__check" style="background-color: #F8F6F2;">
+        <app-also-check [hasHeader]="false" [data]="($data | async)?.services">
+            <div class="flex flex-col">
+                <h2 class="also__title helvetica-roman pb-0"
+                    [innerHtml]="($data | async)?.data?.services[translate.currentLang()]?.title">
+
+                </h2>
+                <p class="also__subtext helvetica-light">
+                    {{($data | async)?.data?.services[translate.currentLang()]?.subtitle}}
+                </p>
+            </div>
+        </app-also-check>
+    </section>
+</section>

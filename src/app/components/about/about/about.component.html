@@ -1,0 +1,54 @@
+<section class="about-local-section pb-0">
+  <h1 class="__text couturier-Regular pb-0">
+    {{ ($data | async)?.data?.intro[translate.currentLang()]?.title_1 }}
+    <span class="inner-text">
+      {{ ($data | async)?.data?.intro[translate.currentLang()]?.title_2 }}
+    </span>
+  </h1>
+  <div class="flex items-center flex-col mt-14 mb-9">
+    <img src="../../../../assets/img/navigations/nav-bird.png" alt="Nav Bird" />
+    <h2 class="__title helvetica-roman pb-0">
+      {{ ($data | async)?.data?.intro[translate.currentLang()]?.subtitle }}
+    </h2>
+  </div>
+  <div class="__subtext text-center relative helvetica-light"
+       [innerHTML]="($data | async)?.data?.intro[translate.currentLang()]?.content"></div>
+  <section class="mobile-scroll-section">
+    <img [src]="translate.img + ($data | async)?.data?.intro[translate.currentLang()]?.image" alt="Scrolling Image"/>
+  </section>
+</section>
+<section class="scroll-section" #scrollSection>
+  <div class="scroll-element pb-20" #scrollElement>
+    <img [src]="translate.img + ($data | async)?.data?.intro[translate.currentLang()]?.image" alt="Scrolling Image" class="scrolling-image" />
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<app-logos [data]="($data | async)?.partners"></app-logos>
+@if (($data | async)?.team?.length) {
+<app-founders [data]="($data | async)?.team"
+  [title]="($data | async)?.data?.team[translate.currentLang()]?.title"></app-founders>
+}
+@if (($data | async)?.data?.branding) {
+<section>
+  <app-branding [data]="($data | async)?.data?.branding"></app-branding>
+</section>
+}
+
+<app-also-check [hasHeader]="false" [data]="($data | async)?.services">
+  <div class="flex flex-col">
+    <h2 class="also__title helverica-roman"
+      [innerHtml]="($data | async)?.data?.services[translate.currentLang()]?.title">
+
+    </h2>
+    <p class="also__subtext helvetica-light">
+      {{ ($data | async)?.data?.services[translate.currentLang()]?.subtitle }}
+    </p>
+  </div>
+</app-also-check>

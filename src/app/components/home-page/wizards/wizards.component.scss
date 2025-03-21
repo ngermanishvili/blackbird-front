@@ -1,0 +1,177 @@
+/* Add application styles & imports to this file! */
+@use "../../../../assets/styles/responsive.scss" as m;
+
+.__wizards {
+  .main__title {
+    font-size: 36px;
+    line-height: 42px;
+    color: #767676;
+    letter-spacing: 0.16px;
+
+    strong {
+      color: #000;
+      font-weight: 400;
+    }
+
+    @include m.respond-to(medium) {
+      font-size: 28px;
+      line-height: 33px;
+    }
+  }
+
+  .carousel-container {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    position: relative;
+  }
+
+  .carousel {
+    display: flex;
+    white-space: nowrap;
+    // transition: 5s;
+    .carousel-item {
+      &:first-child {
+        @include m.respond-to(medium) {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+
+  .carousel-item {
+    display: flex;
+    width: 33.3333vw;
+    min-width: 33vw;
+    flex: initial;
+    max-width: 550px;
+
+    .slide__img {
+      width: 60%;
+    }
+
+    .right__side {
+      padding-right: 50px;
+      width: 100%;
+
+      .__title {
+        font-size: 20px;
+        line-height: 24px;
+        color: #0d0d0d;
+      }
+
+      .__text {
+        font-size: 16px;
+        line-height: 24px;
+        color: #0d0d0d;
+      }
+    }
+
+    @include m.respond-to(xlarge) {
+      width: 50vw;
+      min-width: 50vw;
+
+      .slide__img {
+        width: 50%;
+      }
+
+      .right__side {
+        .__title {
+          font-size: 18px;
+        }
+
+        .__text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    @include m.respond-to(medium) {
+      width: 70vw;
+      min-width: 70vw;
+
+      .right__side {
+        .__title {
+          font-size: 16px;
+        }
+
+        .__text {
+          font-size: 12px;
+        }
+      }
+    }
+
+    @include m.respond-to(small) {
+      width: 70vw;
+      min-width: 70vw;
+      flex-direction: column;
+      padding-right: 50px;
+
+      .slide__img {
+        width: 100%;
+      }
+
+      .right__side {
+        padding-top: 16px;
+        padding-inline: 0 !important;
+        flex-direction: row-reverse;
+
+        .right__side {
+          .__title {
+            font-size: 20px;
+          }
+
+          .__text {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .carousel-item img {
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .product-info {
+    text-align: center;
+  }
+
+  .wizards-container {
+    position: relative;
+    padding-block: 80px;
+    margin-bottom: 100px;
+
+    &::after {
+      content: "";
+      pointer-events: none;
+      top: 2px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 4px);
+      border-top: 1px dashed rgba(28, 28, 28, 0.3);
+      border-bottom: 1px dashed rgba(28, 28, 28, 0.3);
+      position: absolute;
+    }
+
+    border-top: 1px dashed rgba(28, 28, 28, 0.3);
+    border-bottom: 1px dashed rgba(28, 28, 28, 0.3);
+
+    .buttons {
+      position: absolute;
+      top: 57px;
+      right: 0;
+      background: white;
+      z-index: 111;
+    }
+  }
+}
+
+// .c__mobile {
+//     @include m.respond-to(medium) {
+//         transform: translateX(20px) !important;
+//        }
+// }

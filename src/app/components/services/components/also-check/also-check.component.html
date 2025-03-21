@@ -1,0 +1,38 @@
+<div class="check__section h-100">
+  @if (hasHeader) {
+  <div class="__topside">
+    <h2 class="__title pb-0" [innerHtml]="translate.getTranslation(titleData?.section_title)"></h2>
+    <p class="__text">{{translate.getTranslation(titleData?.section_content)}}</p>
+  </div>
+  }
+  <div class="blocks w-full  md:gap-4 sm">
+    <ng-content></ng-content>
+
+    @if (data() && data()?.length) {
+    <a class="content__items service" *ngFor="let item of data()"
+      [routerLink]="['/services', item?.slug, item.id, translate.currentLang()]">
+      <div class="flex ">
+        <h3 class="font-bold helvetica-medium text-xl pb-0">
+          {{translate.getTranslation(item?.title)}}
+        </h3>
+        <!-- <img class="__small-arrow" [src]="item?.main_image" alt="" /> -->
+        <span class="__small-arrow">
+          <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.95825 12.5418L12.0416 5.4585" stroke="#B80E45" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M4.95825 5.4585H12.0416V12.5418" stroke="#B80E45" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+
+        </span>
+      </div>
+      @if (item?.branding_image) {
+      <img class="img__anim" [src]="translate.getImgSrc(item?.branding_image)" alt="">
+      }
+      @if (item?.main_icon) {
+      <img class="img__anim" [src]="translate.getImgSrc(item?.main_icon_card)" alt="">
+      }
+      <span class="__subtext block helvetica-light ">
+        {{translate.getTranslation(item?.short_description)}} </span>
+    </a>
+    }
+  </div>
+</div>

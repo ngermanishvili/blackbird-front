@@ -1,0 +1,75 @@
+<div class="loader" [ngClass]="{'hidden': loader}">
+  <img src="../assets/img/gifs/loader-b.gif" alt="">
+  <div class="progress-bar">
+    <div class="progress-fill" [style.width.%]="progress"></div>
+  </div>
+</div>
+<div id="homePage"></div>
+<div class="main__block">
+  <div style="
+    background-color: #dddddd;
+    ">
+    <app-header />
+  </div>
+  <router-outlet />
+  <footer>
+    <app-footer></app-footer>
+    <div class="scroll__up cursor-pointer" (click)="gotoTop('smooth')" *ngIf="scrollPercentage"
+      [ngClass]="{'scroll__up--full': scrollPercentage > 87}">
+      <svg class="progress-circle" viewBox="0 0 120 120">
+        <circle class="track" cx="60" cy="60" r="50"></circle>
+        <circle class="filled" cx="60" cy="60" r="50" stroke-dasharray="0 314"
+          [style.strokeDasharray]="(scrollPercentage / 100) * 314 + ' 314'"></circle>
+      </svg>
+    </div>
+  </footer>
+</div>
+
+
+@if (service.contactPopup()) {
+<div class="contact__popup">
+  <form [formGroup]="contactForm" class="contact__block">
+    <div class="contact__header flex md:justify-end w-full">
+      <div class="ss:flex items-center md:hidden" (click)="service.toggleOpen(false)">
+        <img class="mr-1" src="../../../assets/img/back.svg" alt="">
+        <span class="text-sm	text-white">{{translateService.getTranslation(apiService?.langStrings?.back)}}</span>
+      </div>
+      <svg class="cursor-pointer ss:hidden md:block" (click)="service.toggleOpen(false)" width="35" height="35"
+        viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M26.25 8.75L8.75 26.25" stroke="#E1E1E1" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <path d="M8.75 8.75L26.25 26.25" stroke="#E1E1E1" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div class="head__block flex justify-between pt-[16px] msx__block items-center">
+      <h2 class="main__text helvetica-bold"> 
+        {{translateService.getTranslation(apiService?.langStrings?.get_in_touch)}}
+    
+      </h2>
+      <div>
+        <img class="ss:hidden md:block w-28" src="../../../../assets/img/profile.png" alt="">
+      </div>
+    </div>
+    <div class="form__block msx__block flex-col">
+      <div class="gap-x-6 flex items-center w-full ss:flex-col md:flex-row">
+        <input placeholder="{{translateService.getTranslation(apiService?.langStrings?.name_surname)}}" formControlName="name" class="base__input helvetica-roman" type="text">
+        <input placeholder="{{translateService.getTranslation(apiService?.langStrings?.email)}}" formControlName="email" class="base__input helvetica-roman" type="email">
+      </div>
+      <div class="w-full ss:mt-7 md:mt-12">
+        <textarea formControlName="message" placeholder="{{translateService.getTranslation(apiService?.langStrings?.leave_a_note)}}"
+          class="base__input textarea helvetica-roman"></textarea>
+      </div>
+      <div class="error text-red-600 helvetica-roman">
+        {{error}}
+      </div>
+      <div class="ss:mt-4 md:mt-9">
+        <button (click)="submitForm()" type="submit" class="f-buuton">{{translateService.getTranslation(apiService?.langStrings?.send)}}</button>
+      </div>
+      <div class="flex justify-center">
+        <img class="ss:block md:hidden ss:mt-6 w-64" src="../../../../assets/img/profile.png" alt="">
+      </div>
+    </div>
+  </form>
+</div>
+}

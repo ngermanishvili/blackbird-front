@@ -1,0 +1,240 @@
+<section class="banner-section compress" #resizableDiv
+  [ngClass]="{ 'hide__header' : hdieHeader , 'loaded' : loaded()} ">
+  <div class="banner__content ">
+    <a [routerLink]="['/' , translationService.currentLang()]" class="overflow-hidden"
+      [ngClass]="{'cursor-pointer': routeCount > 1 , 'pointer-events-none' : routeCount === 1}">
+      <img class="header__logo" src="../../../../assets/img/logo.png" alt="">
+    </a>
+    <!-- <h3 class="under__text text-2xl	helvetica-light" [ngClass]="{'opacity-0': currentRoute() !== 'home'}">
+        {{typedText }}</h3> -->
+    <!-- </div> -->
+    <div class="right__side flex items-center">
+      <app-lang [dark]="false" class="ss:mr-[12px] md:mr-0"></app-lang>
+      <div class="mx-[12px] ss:hidden md:block">
+        <app-contact>
+        </app-contact>
+      </div>
+      <div class="menu__item cursor-pointer" (click)="toggleNav()">
+        <img src="../assets/img/menu-icon.svg" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+<div class="placeholder" [ngClass]="{'compress': scrollTop ,  'other' : currentRoute() !== 'home'}">
+
+</div>
+
+<ng-container *ngIf="loaded">
+  <div class="nav__menu  hidden md:flex" [ngClass]="{'active': navMenu}">
+    <div class="flex w-full">
+      <div class="left__side">
+        <div class="menu__left">
+          <span class="__text">
+            [{{translationService.getTranslation(service?.langStrings?.menu)}}]
+          </span>
+
+          <img src="../../../../assets/img/navigations/nav-bird.png" alt="">
+        </div>
+        <div class="nav__side">
+          <div class="__navigations">
+            <a class="__router couturier-Regular" (mouseenter)="activeHover('Home')"
+              [ngClass]="{'active': activeHoverItem === 'Home'}" (click)="toggleNav()" [routerLink]="[ '/']">
+              {{translationService.getTranslation(service?.langStrings?.home)}}
+              <img src="../../../../assets/img/navigations/nav-arrow.svg" alt="">
+            </a>
+            <a class="__router couturier-Regular" (mouseenter)="activeHover('Services')"
+              [ngClass]="{'active': activeHoverItem === 'Services'}" (click)="toggleNav()"
+              [routerLink]="[ '/services/marketing/2' , this.translationService.currentLang()]">
+              {{translationService.getTranslation(service?.langStrings?.services)}}
+              <img src="../../../../assets/img/navigations/nav-arrow.svg" alt="">
+            </a>
+            <a class="__router couturier-Regular" (click)="toggleNav()" (mouseenter)="activeHover('About')"
+              [routerLink]="[ '/about' , this.translationService.currentLang()]"
+              [ngClass]="{'active': activeHoverItem === 'About'}">
+              {{translationService.getTranslation(service?.langStrings?.about)}}
+              <img src="../../../../assets/img/navigations/nav-arrow.svg" alt="">
+            </a>
+            <a class="__router couturier-Regular" [ngClass]="{'active': activeHoverItem === 'Contact'}"
+              (mouseenter)="activeHover('Contact')" (click)="toggleNav()"
+              [routerLink]="[ '/contact' , this.translationService.currentLang()]">
+              {{translationService.getTranslation(service?.langStrings?.contact)}}
+              <img src="../../../../assets/img/navigations/nav-arrow.svg" alt="">
+            </a>
+          </div>
+          <div class="blcok overflow-hidden">
+            <div class="__socials ">
+              <div class="social__items helvetica-roman __black" (click)="toggleNav()">
+                <a class="__up" [routerLink]="['/success-cases' , this.translationService.currentLang()]">
+                  [{{ translationService.getTranslation(service?.langStrings?.success_cases)}}]
+
+                </a>
+                <a class="__down" [routerLink]="['/success-cases' , this.translationService.currentLang()]">
+                  [{{ translationService.getTranslation(service?.langStrings?.success_cases)}}]
+
+                </a>
+              </div>
+              <div class="social__items helvetica-roman">
+                <a class="__up" target="_blank" [href]="($general | async)?.social?.facebook">
+                  [Facebook]
+                </a>
+                <a class="__down" target="_blank" [href]="($general | async)?.social?.facebook">
+                  [Facebook]
+                </a>
+              </div>
+              <div class="social__items helvetica-roman">
+                <a class="__up" target="_blank" [href]="($general | async)?.social?.instagram">
+                  [Instagram]
+                </a>
+                <a class="__down" target="_blank" [href]="($general | async)?.social?.instagram">
+                  [Instagram]
+                </a>
+              </div>
+              <div class="social__items helvetica-roman">
+                <a class="__up" target="_blank" [href]="($general | async)?.social?.youtube">
+                  [Youtube]
+                </a>
+                <a class="__down" target="_blank" [href]="($general | async)?.social?.youtube">
+                  [Youtube]
+                </a>
+              </div>
+              <div class="social__items helvetica-roman">
+                <a class="__up" target="_blank" [href]="($general | async)?.social?.linkedin">
+                  [Linkedin]
+                </a>
+                <a class="__down" target="_blank" [href]="($general | async)?.social?.linkedin">
+                  [Linkedin]
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right__side w-full flex">
+        <div class="content__side w-full {{activeHoverItem}}">
+          <div class="middle__services" [ngClass]="{'show': activeHoverItem === 'Services'}">
+            @for ( item of ($services | async)?.data; track item ) {
+            <a class="content__items " (click)="toggleNav()"
+              [routerLink]="['/services', item?.slug, item.id, translationService.currentLang()]">
+              <div class="flex items-center helvetica-bold">
+                {{translationService.getTranslation(item?.title)}}
+
+                <img class="__small-arrow ml-1" src="../../../../assets/img/navigations/nav-arrow.svg"
+                  [alt]="item?.title">
+              </div>
+              <img class="img__anim" [src]="translationService.getImgSrc(item?.main_icon_card)" alt="">
+
+              <span class="__subtext block helvetica-light">
+                {{translationService.getTranslation(item?.short_description)}}
+              </span>
+            </a>
+            }
+          </div>
+        </div>
+        <div class="close__side flex justify-center w-24 items-start pt-7">
+          <img (click)="toggleNav()" class="w-6 cursor-pointer" src="../../../../assets/img/navigations/close.png"
+            alt="">
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="nav__menu  flex md:hidden flex-col" [ngClass]="{'active': navMenu}">
+    <div class="mobile__header flex justify-between items-start w-full">
+      <span class="__mobile-text helvetica-roman">
+        {{translationService.getTranslation(service?.langStrings?.menu)}}
+      </span>
+      <img (click)="toggleNav()" class="w-6 cursor-pointer" src="../../../../assets/img/navigations/close.png" alt="">
+    </div>
+    <div class="left__side">
+      <div class="nav__side">
+        <div class="__navigations">
+          <a class="__router couturier-Regular" (click)="toggleNav()" [routerLink]="['/']">
+            {{translationService.getTranslation(service?.langStrings?.home)}}
+            <img src="../../../../assets/img/navigations/nav-arrow.svg" alt="">
+          </a>
+          <div class="mobile__service">
+            <a class="__router couturier-Regular">
+              {{translationService.getTranslation(service?.langStrings?.services)}}
+              <img src="../../../../assets/img/navigations/nav-arrow.svg" alt="">
+            </a>
+            <div class="mobile-content__items flex flex-col pl-7"
+              [ngClass]="{'active  my-4': activeHoverItem === 'Services'}">
+              <a *ngFor="let item of ($services | async)?.data" class="__item mb-4 text-xl" (click)="toggleNav()"
+                [routerLink]="['/services', item?.slug, item.id, translationService.currentLang()]">
+                {{translationService.getTranslation(item?.title)}}
+              </a>
+            </div>
+          </div>
+          <a class="__router couturier-Regular" (click)="toggleNav()"
+            [routerLink]="[ '/about' , this.translationService.currentLang()]">
+            {{translationService.getTranslation(service?.langStrings?.about)}}
+            <img src="../../../../assets/img/navigations/nav-arrow.svg" alt="">
+          </a>
+          <a class="__router couturier-Regular" (click)="toggleNav()"
+            [routerLink]="[ '/contact' , this.translationService.currentLang()]">
+            {{translationService.getTranslation(service?.langStrings?.contact)}}
+            <img src="../../../../assets/img/navigations/nav-arrow.svg" alt="">
+          </a>
+        </div>
+
+      </div>
+    </div>
+    <div class="blcok mt-auto overflow-hidden">
+      <div class="__socials helvetica-roman">
+        <!-- <div class="social__items helvetica-roman">
+          <a class="__up" target="_blank" [routerLink]="['/success-cases']">
+            [Success Cases]
+          </a>
+          <a class="__down" target="_blank" [routerLink]="['/success-cases']">
+            [Success Cases]
+          </a>
+        </div> -->
+        <div class="__socials">
+          <app-contact class="ss:block md:hidden"></app-contact>
+          <div class="social__items  __black helvetica-roman ss:block md:hidden" (click)="toggleNav()">
+            <a class="__up" [routerLink]="['/success-cases' , this.translationService.currentLang()]">
+              [{{ translationService.getTranslation(service?.langStrings?.success_cases)}}]
+            </a>
+            <a class="__down" [routerLink]="['/success-cases' , this.translationService.currentLang()]">
+              [{{ translationService.getTranslation(service?.langStrings?.success_cases)}}]
+            </a>
+          </div>
+          <div class="social__items helvetica-roman ">
+            <a class="__up" target="_blank" [href]="($general | async)?.social?.facebook">
+              [Facebook]
+            </a>
+            <a class="__down" target="_blank" [href]="($general | async)?.social?.facebook">
+              [Facebook]
+            </a>
+          </div>
+          <div class="social__items helvetica-roman">
+            <a class="__up" target="_blank" [href]="($general | async)?.social?.instagram">
+              [Instagram]
+            </a>
+            <a class="__down" target="_blank" [href]="($general | async)?.social?.instagram">
+              [Instagram]
+            </a>
+          </div>
+          <div class="social__items helvetica-roman">
+            <a class="__up" target="_blank" [href]="($general | async)?.social?.youtube">
+              [Youtube]
+            </a>
+            <a class="__down" target="_blank" [href]="($general | async)?.social?.youtube">
+              [Youtube]
+            </a>
+          </div>
+          <div class="social__items helvetica-roman">
+            <a class="__up" target="_blank" [href]="($general | async)?.social?.linkedin">
+              [Linkedin]
+            </a>
+            <a class="__down" target="_blank" [href]="($general | async)?.social?.linkedin">
+              [Linkedin]
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</ng-container>

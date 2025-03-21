@@ -1,0 +1,16 @@
+<div class="center services__block">
+    <div class="opt__dot helvetica-light"><span class="circle bg__{{data()?.slug}}"></span> Intro {{data()?.id}} </div>
+    <div class="block__section">
+        <div class="__left">
+            <img [src]="data()?.intro?.section_image" alt="">
+        </div>
+        <div class="__right flex flex-col">
+            <h1 class="__title helvetica-roman">
+                <span [innerHTML]="translate.getTranslation(data()?.intro?.section_subtitle)"></span>
+                <span class="secondary__text"> {{translate.getTranslation(data()?.intro?.section_title)}}</span>
+            </h1>
+            <div class="__text1 helvetica-light" [innerHTML]="translate.getTranslation(data()?.intro?.section_content)">
+            </div>
+        </div>
+    </div>
+</div>

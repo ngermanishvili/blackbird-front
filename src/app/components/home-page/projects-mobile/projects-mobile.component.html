@@ -1,0 +1,50 @@
+@if (data()) {
+<div appInView class="bg-black projects__content py-[100px]" (inView)="onInView($event)">
+    <div class="center flex-col justify-between relative opacity-0">
+        <div class="top__side flex justify-between">
+            <div class="left__side">
+                <img class="top__side__img" src="../../../../assets/img/top-plus.svg" alt="">
+
+                <!-- <div class="text__top text-white helvetica-roman">
+                    {{data()[translate.currentLang()]?.number_1_text}}
+                </div> -->
+            </div>
+
+            <img class="anim__top" src="../../../../assets/img/anim-top.svg" alt="">
+        </div>
+        <div class="middle__side text-white flex justify-center flex-col helvetica">
+            <h2 class="whitespace-nowrap helvetica-roman block" [innerHtml]="data()[translate.currentLang()]?.title">
+            </h2>
+            <div>
+                <button class="project__btn helvetica-light"
+                    [routerLink]="['/success-cases' , translate.currentLang()]">
+                    {{data()[translate.currentLang()]?.button_title}}
+
+                    <svg class="ml-[10px]" width="16" height="17" viewBox="0 0 16 17" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M14.9906 0.5C13.1331 2.35747 10.8965 2.84119 8.78773 2.73771C6.67897 2.63424 4.72694 1.90444 3.70722 1.37975L3.05472 2.64848C4.24503 3.26094 6.33157 4.0455 8.71802 4.1626C9.65076 4.20837 10.6335 4.09843 11.6152 3.87539L0 15.4906L1.00941 16.5L12.6246 4.8848C12.4016 5.86648 12.2916 6.84924 12.3374 7.78198C12.4545 10.1684 13.2391 12.255 13.8515 13.4453L15.1203 12.7928C14.5956 11.7731 13.8658 9.82103 13.7623 7.71227C13.6588 5.60351 14.1425 3.36688 16 1.50941L14.9906 0.5Z"
+                            fill="white" />
+                    </svg>
+
+                </button>
+            </div>
+        </div>
+        <div class="bottom__side flex justify-between">
+            <img class="anim__bottom" src="../../../../assets/img/anim-bottom.svg" alt="">
+            <div class="left__side">
+                <img class="bottom__side__img" src="../../../../assets/img/bottom-plus.svg" alt="">
+                <!-- <div class="text__bottom text-white helvetica-roman">
+                    {{data()[translate.currentLang()]?.number_2_text}}
+                </div> -->
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>
+}

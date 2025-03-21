@@ -1,0 +1,15 @@
+@if ( data() && data().length) {
+<section class="sponsosrs__section h-72 bg-black flex ">
+    <div class="scrollable-container center justify-between flex overflow-auto scrollbar gap-3 overflow-auto">
+        @for (item of data(); track $index) {
+        <div class="flex items-center logos__items">
+            @if (item?.logo) {
+            <img class="" [src]="translate.getImgSrc(item.logo)" [alt]="translate.getTranslation(item?.name)">
+            }@else {
+            <img class="" [src]="translate.getImgSrc(item?.main_image)" [alt]="translate.getTranslation(item?.name)">
+            }
+        </div>
+        }
+    </div>
+</section>
+}

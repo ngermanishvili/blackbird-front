@@ -1,0 +1,60 @@
+.lang {
+    position: relative;
+
+    svg {
+        transition: 0.3s;
+    }
+
+    .languages {
+        display: none;
+        flex-direction: column;
+        gap: 17px;
+        position: absolute;
+        right: -10px;
+        background: white;
+        padding-block: 12px;
+        border-radius: 2px;
+        margin-top: 5px;
+
+        .lang__items {
+            color: #666666;
+            font-size: 16px;
+            padding-inline: 16px;
+            transition: 0.3s;
+
+            &:hover {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+    &.__dark {
+        .__text {
+            color: white;
+        }
+
+        svg path {
+            stroke: white;
+        }
+
+        .languages {
+            top: 0;
+            transform: translateY(calc(-100% - 10px));
+            background-color: #0D0D0D;
+        }
+
+        .lang__items {
+            color: #666666;
+        }
+    }
+
+    &.active {
+        .languages {
+            display: flex;
+        }
+
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+}

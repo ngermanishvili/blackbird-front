@@ -1,0 +1,87 @@
+@use '../../../../assets/styles/responsive.scss' as m;
+
+
+
+.services__nav {
+    align-items: center;
+    padding-top: 40px;
+
+    .services__list {
+        width: 100%;
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 36px;
+            background-color: #F8F8F8;
+            border: 1px solid #E7E7E7;
+            transition: 0.3s;
+            color: #767676;
+            text-transform: capitalize;
+            letter-spacing: 4.48px;
+            font-size: 12px;
+
+            @include m.respond-to(medium) {
+                font-size: 14px;
+            }
+
+            &.active {
+                text-transform: uppercase;
+                background-color: #B80E45;
+                border-color: transparent !important;
+                color: #FFFFFF;
+            }
+        }
+
+    }
+}
+
+.what__included {
+    position: sticky;
+    margin-top: 30px;
+    z-index: 50;
+    top: 20px;
+    margin-bottom: -165px;
+
+    .color__circle {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+    }
+
+    .sub__text {
+        font-size: 12px;
+        color: #000000;
+        line-height: 15px;
+        padding-left: 10px;
+    }
+
+    &.dark {
+        background-color: black;
+        margin-bottom: 0;
+        padding-block: 15px;
+        top: 0;
+
+        .sub__text {
+            color: white;
+        }
+    }
+}
+
+.service-items {
+    margin-top: 100px;
+    padding-bottom: 250px;
+    background-image: url(../../../../assets/img/services-grid.png);
+    border-top: 1px dashed #d0d0d0;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 100%;
+    overflow: hidden;
+
+    @include m.respond-to(small) {
+        padding-bottom: 100px;
+        padding-top: 80px;
+    }
+}

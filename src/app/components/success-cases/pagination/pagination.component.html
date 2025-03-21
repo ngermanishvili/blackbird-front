@@ -1,0 +1,64 @@
+<!-- <div *ngIf="paginationData">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="!paginationData.prev_page_url">
+                <a class="page-link" (click)="goToPage(paginationData.prev_page_url)">
+                    prev
+                </a>
+            </li>
+            <ng-container *ngFor="let link of paginationData.links; let last = last; let first = first">
+
+
+                <li *ngIf="!last && !first" class="page-item" [class.active]="link.active">
+                    <a class="page-link" (click)="goToPage(link.url)">
+                        {{ link.label }}
+                    </a>
+                </li>
+            </ng-container>
+
+            <li class="page-item" [class.disabled]="!paginationData.next_page_url">
+                <a class="page-link" (click)="goToPage(paginationData.next_page_url)">
+                    next
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div> -->
+
+<div *ngIf="paginationData">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="!paginationData.prev_page_url">
+                <a class="page-link" (click)="goToPage(paginationData.prev_page_url)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12L5 12" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 19L5 12L12 5" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                </a>
+            </li>
+
+            <!-- Handle pagination links -->
+            <ng-container *ngFor="let link of getDisplayedLinks(); let last = last; let first = first">
+                <li class="page-item" *ngIf="displayLabbel(link.label)" [class.active]="activePage == link.label">
+                    <a class="page-link" (click)="goToPage(link.url)" *ngIf="link.url">
+                        {{ displayLabbel(link.label) }}
+                    </a>
+                    <span class="page-link text-red-950" *ngIf="!link.url">
+                        {{ link.label }}
+                    </span>
+                </li>
+            </ng-container>
+
+            <li class="page-item" [class.disabled]="!paginationData.next_page_url">
+                <a class="page-link" (click)="goToPage(paginationData.next_page_url)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12L19 12" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 5L19 12L12 19" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

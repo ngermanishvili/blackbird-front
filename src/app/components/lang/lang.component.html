@@ -1,0 +1,17 @@
+<div class="lang" [ngClass]="{'active': langDrop , '__dark' : dark}">
+    <div class="active__lang flex items-center cursor-pointer" (click)="toggleLang()">
+        <span *ngIf="translationService.currentLang()" class="__text helvetica-light">
+            {{translationService.currentLang() === 'ka' ? 'ქა' : translationService.currentLang() }}
+        </span>
+        <svg class="ml-1" width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.25 1.375L4.5 4.625L7.75 1.375" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </div>
+    <div class="languages">
+        @for ( item of langItems; track item.lang ) {
+        <button class="lang__items helvetica-light" (click)="setLanguage(item.lang)">
+            {{item.text }}
+        </button>
+        }
+    </div>
+</div>

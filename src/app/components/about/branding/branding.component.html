@@ -1,0 +1,17 @@
+@if (data()) {
+<section class="branding-section">
+    <div class="center" [routerLink]="['/about-inner' , translate.currentLang()]">
+        <div class="text__side">
+            <span class="__view flex items-center cursor-pointer helvetica-light">
+                {{data()[translate.currentLang()]?.button_text}}
+                <img src="../../../../assets/img/success-cases/view.svg" alt="" />
+            </span>
+            <h2 class="__title couturier-Regular" [innerHtml]="data()[translate.currentLang()]?.title"></h2>
+
+        </div>
+        <img class="heart__img" src="../../../../assets/img/heart.png" alt="">
+        <img class="__img" src="../../../../assets/img/black bird.png" alt="">
+        <!-- <img class="__img" [src]="translate.getImgSrc(data()[translate.currentLang()]?.image)" alt="" /> -->
+    </div>
+</section>
+}

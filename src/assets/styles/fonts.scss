@@ -1,0 +1,116 @@
+@mixin font-face($name, $file) {
+    @font-face {
+        font-family: "#{$name}";
+        src: url("../fonts/#{$file}.ttf") format("truetype");
+    }
+}
+@include font-face("Couturier-Black", "Couturier-Black");
+@include font-face("Couturier-BlackIt", "Couturier-BlackIt");
+@include font-face("Couturier-Bold", "Couturier-Bold");
+@include font-face("Couturier-BoldIt", "Couturier-BoldIt");
+@include font-face("Couturier-Regular", "Couturier-Regular");
+@include font-face("Couturier-RegularIt", "Couturier-RegularIt");
+@include font-face("Couturier-SemiBold", "Couturier-SemiBold");
+@include font-face("Couturier-SemiBoldIt", "Couturier-SemiBoldIt");
+
+@include  font-face("HelveticaNeue-Black", "HelveticaNeue-Black");
+@include  font-face("HelveticaNeue-BlackItalic", "HelveticaNeue-BlackItalic");
+
+@include  font-face("HelveticaNeue-Bold", "HelveticaNeue-Bold");
+@include  font-face("HelveticaNeue-BoldItalic", "HelveticaNeue-BoldItalic");
+
+@include  font-face("HelveticaNeue-Heavy", "HelveticaNeue-Heavy");
+@include  font-face("HelveticaNeue-HeavyItalic", "HelveticaNeue-HeavyItalic");
+
+@include  font-face("HelveticaNeue-Italic", "HelveticaNeue-Italic");
+
+@include  font-face("HelveticaNeue-Light", "HelveticaNeue-Light");
+@include  font-face("HelveticaNeue-LightItalic", "HelveticaNeue-LightItalic");
+
+@include  font-face("HelveticaNeue-Medium", "HelveticaNeue-Medium");
+@include  font-face("HelveticaNeue-MediumItalic", "HelveticaNeue-MediumItalic");
+
+@include  font-face("HelveticaNeue-Roman", "HelveticaNeue-Roman");
+
+@include  font-face("HelveticaNeue-Thin", "HelveticaNeue-Thin");
+@include  font-face("HelveticaNeue-ThinItalic", "HelveticaNeue-ThinItalic");
+
+@include  font-face("HelveticaNeue-UltraLight", "HelveticaNeue-UltraLight");
+@include  font-face("HelveticaNeue-UltraLightItalic", "HelveticaNeue-UltraLightItalic");
+
+.couturier-black {
+    font-family: Couturier-Black;
+}
+.couturier-BlackIt {
+    font-family: Couturier-BlackIt;
+}
+.couturier-Bold   {
+    font-family: Couturier-Bold;
+}
+.couturier-BoldIt{
+    font-family: Couturier-BoldIt;
+}
+.couturier-Regular{
+    font-family: Couturier-Regular;
+}
+.couturier-RegularIt{
+    font-family: Couturier-RegularIt;
+}
+.couturier-SemiBoldIt{
+    font-family: Couturier-SemiBoldIt;
+}
+.counter-black {
+    font-family: Couturier-Black;
+}
+//.helvetica {
+//    font-family: HelveticaNeue;
+//}
+
+.helvetica-black {
+    font-family: HelveticaNeue-Black;
+}
+.helvetica-black-italic {
+    font-family: HelveticaNeue-BlackItalic;
+}
+.helvetica-bold {
+    font-family: HelveticaNeue-Bold;
+}
+.helvetica-bold-italic {
+    font-family: HelveticaNeue-BoldItalic;
+}
+.helvetica-heavy {
+    font-family: HelveticaNeue-Heavy;
+}
+.helvetica-heavy-italic {
+    font-family: HelveticaNeue-HeavyItalic;
+}
+.helvetica-italic {
+    font-family: HelveticaNeue-Italic;
+}
+.helvetica-light {
+    font-family: HelveticaNeue-Light;
+}
+.helvetica-light-italic {
+    font-family: HelveticaNeue-LightItalic;
+}
+.helvetica-medium {
+    font-family: HelveticaNeue-Medium;
+}
+.helvetica-medium-italic {
+    font-family: HelveticaNeue-MediumItalic;
+}
+.helvetica-roman {
+    font-family: HelveticaNeue-Roman;
+}
+.helvetica-thin {
+    font-family: HelveticaNeue-Thin;
+}
+.helvetica-thin-italic {
+    font-family: HelveticaNeue-ThinItalic;
+}
+.helvetica-ultra-light {
+    font-family: HelveticaNeue-UltraLight;
+}
+.helvetica-ultra-light-italic {
+    font-family: HelveticaNeue-UltraLightItalic;
+}

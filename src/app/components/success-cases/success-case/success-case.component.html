@@ -1,0 +1,40 @@
+@if ($data) {
+
+<section class="success__case">
+  <div class="center flex-col">
+    <div class="w-full">
+      <h1 class="head__title flex items-center helvetica-roman pb-0">
+        <img [routerLink]="['/success-cases' , translateService.currentLang()]" class="block mr-3 cursor-pointer"
+          src="../../../../assets/img/back.svg" alt="">
+        {{translateService.getTranslation( ($data | async)?.title )}}
+      </h1>
+      <div class="banner mb-8">
+        <img class="w-full object-cover" [src]="($data | async)?.main_image" [alt]="($data | async)?.image?.alt" />
+      </div>
+      <div class="__details">
+        <div>
+          <div class="__text helvetica-light" [innerHTML]="translateService.getTranslation(($data | async)?.content)">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="image-gallery">
+      <div class="overflow-hidden" *ngFor="let img of images | slice:0:4; let i = index">
+        <img [src]="translateService.getImgSrc(img)" (click)="openImagePopup(i)" [alt]="img.alt" class="gallery-image">
+      </div>
+    </div>
+  </div>
+</section>
+}
+
+<div class="image-popup" *ngIf="isPopupVisible">
+  <div class="popup-content">
+    <span class="close-button" (click)="closePopup()">X</span>
+    <img [src]="translateService.getImgSrc(currentImage)" [alt]="currentImage.alt" class="active-image">
+    <button class="prev-button" (click)="prevImage()">&#10094;</button>
+    <button class="next-button" (click)="nextImage()">&#10095;</button>
+  </div>
+</div>

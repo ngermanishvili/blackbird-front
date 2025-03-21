@@ -1,0 +1,140 @@
+@use "../../../../assets/styles/responsive.scss" as m;
+
+.branding-section {
+  background-color: #f9f8f4;
+  padding-block: 200px;
+  min-height: 100vh;
+
+  @include m.respond-to(medium) {
+    padding-block: 100px;
+    padding-inline: 20px;
+    min-height: 400px;
+  }
+
+  // @include m.respond-to(small) {
+  //     padding-block: 100px;
+  //     padding-inline: 20px;
+  //     min-height: 1000px;
+  // }
+
+  .center {
+    background-color: white;
+    border: 1px solid #e1e1e1;
+    min-height: 630px;
+    padding: 0px 100px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+      .__img {
+        transform: scale(1.1);
+      }
+    }
+
+    @include m.respond-to(medium) {
+      min-height: 300px;
+      padding: 18px 26px;
+    }
+
+    .text__side {
+      .__view {
+        display: flex;
+        align-items: center;
+
+        @include m.respond-to(small) {
+          font-size: 14px;
+
+          img {
+            height: 16px;
+            margin-bottom: 1px;
+          }
+        }
+      }
+
+      .__title {
+        font-size: 62px;
+        margin-top: 18px;
+        line-height: 90px;
+        font-weight: 400;
+        max-width: 500px;
+        letter-spacing: 0.32px;
+        color: #666666;
+
+        span {
+          color: #000;
+        }
+
+        @include m.respond-to(medium) {
+          font-size: 24px;
+          max-width: 200px;
+          line-height: 30px;
+        }
+      }
+    }
+
+    .__img {
+      position: absolute;
+      right: 50px;
+      bottom: 0;
+      z-index: 10;
+      transition: 0.5s;
+      pointer-events: none;
+    }
+
+    .heart__img {
+      position: absolute;
+      right: 20%;
+      bottom: 10%;
+      z-index: 20;
+      animation: scaleUp 0.8s infinite ease-in-out;
+
+      @include m.respond-to(large) {
+        right: 25%;
+        width: 115px;
+      }
+
+      @include m.respond-to(medium) {
+        right: 25%;
+        bottom: 5%;
+        width: 70px;
+      }
+
+      @include m.respond-to(small) {
+        right: 30%;
+        bottom: 5%;
+        width: 50px;
+      }
+    }
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.5);
+  }
+
+  5% {
+    transform: scale(0.52);
+  }
+
+  10% {
+    transform: scale(0.5);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(0.98);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.5);
+  }
+}

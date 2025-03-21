@@ -1,0 +1,56 @@
+@use "../../../assets/styles/responsive.scss" as m;
+
+.contact__section {
+    padding-top: 95px;
+    @include m.respond-to(medium) {
+        padding-top: 50px;
+
+    }
+    .soc__content {
+        @include m.respond-to(medium) {
+            flex-direction: column;
+        }
+
+        .__title {
+            color: #2B2B2B;
+            font-size: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            white-space: nowrap;
+
+            &::after {
+                content: '';
+                width: 20px;
+                height: 1px;
+                background-color: #B80E45;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+            }
+        }
+
+        .social__side {
+            @include m.respond-to(medium) {
+                flex-direction: column;
+                margin-left: 0;
+                margin-top: 30p;
+            }
+
+            padding-top: 30px;
+            margin-top: 15px;
+            border-top: 1px solid #E1E1E1;
+            width: 100%;
+            margin-left: 125px;
+            padding-bottom: 60px;
+
+            .__location {
+                font-size: 18px;
+                color: #838383;
+                margin-right: 150px;
+                min-width: 150px;
+                margin-bottom: 20px;
+            }
+        }
+
+    }
+}

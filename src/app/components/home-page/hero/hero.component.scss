@@ -1,0 +1,173 @@
+@use "../../../../assets/styles/responsive.scss" as m;
+$transition: 1.2s;
+
+.banner-section {
+    height: calc(100vh - 121px);
+    min-height: 500px;
+    background-color: #dddddd;
+    background-image: url(../../../../assets/img/banner.png);
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: right bottom;
+    display: flex;
+    align-items: end;
+    padding-bottom: 100px;
+    transition: 1.2s cubic-bezier(0.42, 0, 0.70, 1);
+
+
+    @include m.respond-to(medium) {
+        min-height: calc(100vh - 280px);
+        max-height: calc(100vh - 280px);
+        background-size: 120%;
+        padding-bottom: 32vh;
+    }
+
+    @include m.respond-to(small) {
+        background-size: 200%;
+        background-position: 75% 80%;
+    }
+
+    &.loaded {
+        .banner__content {
+            .hidable__image {
+                transition: 1.2s ease-out;
+                transform: translateY(0);
+
+                .black__bird {
+                    opacity: 1;
+                    transition: $transition;
+                    transition-delay: $transition * 2;
+                }
+
+                .word__1,
+                .word__2,
+                .word__3,
+                .word__4,
+                .word__5,
+                .word__6,
+                .word__7,
+                .word__8,
+                .word__9,
+                .word__10 {
+                    transform: translateY(0);
+                    max-height: 400px;
+
+                    transition: 1.2s cubic-bezier(0.42, 0, 0.70, 1);
+
+                }
+
+                .word__1 {
+                    transition-delay: 0.1s;
+                }
+
+                .word__2 {
+                    transition-delay: 0.2s;
+                }
+
+                .word__3 {
+                    transition-delay: 0.3s;
+                }
+
+                .word__4 {
+                    transition-delay: 0.4s;
+                }
+
+                .word__5 {
+                    transition-delay: 0.5s;
+                }
+
+                .word__6 {
+                    transition-delay: 0.6s;
+                }
+
+                .word__7 {
+                    transition-delay: 0.7s;
+                }
+
+                .word__8 {
+                    transition-delay: 0.8s;
+                }
+
+                .word__9 {
+                    transition-delay: 0.9s;
+                }
+
+                .word__10 {
+                    transition-delay: 1s;
+                }
+            }
+        }
+    }
+
+    .banner__content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        transition: 1.2s cubic-bezier(0.42, 0, 0.7, 1);
+        padding-left: 60px;
+
+
+        @include m.respond-to(medium) {
+            max-width: 100%;
+            overflow: hidden;
+
+            .hidable__image {
+                width: 80%;
+            }
+        }
+
+        @include m.respond-to(small) {
+            padding-inline: 20px;
+            max-width: 100%;
+
+            .hidable__image {
+                width: 100%;
+            }
+        }
+
+
+        .hidable__image {
+            max-width: 900px;
+            transition: $transition;
+
+            @include m.respond-to(xlarge) {
+                max-width: 80%;
+            }
+
+
+            .black__bird {
+                opacity: 0;
+                transition: $transition;
+            }
+
+            .word__1,
+            .word__2,
+            .word__3,
+            .word__4,
+            .word__5,
+            .word__6,
+            .word__7,
+            .word__8,
+            .word__9,
+            .word__10 {
+                transform: translateY(100%);
+                max-height: 400px;
+                transition: $transition;
+            }
+        }
+
+        .under__text {
+            white-space: nowrap;
+            overflow: hidden;
+            transition: $transition;
+            letter-spacing: 0.32px;
+
+
+            @include m.respond-to(medium) {
+                font-size: 14px;
+            }
+
+        }
+    }
+
+}

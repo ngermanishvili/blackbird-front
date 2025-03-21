@@ -1,0 +1,46 @@
+<section class="founder-section">
+  <div class="overflow-auto flex items-stretch py-9 scrollbar horizontal-scroll-container">
+    <!-- @if (firstElement()) { -->
+    <div class="founder__side">
+      <h2 class="__title helvetica-roman pb-0">{{ title() }}</h2>
+      <div class="founder__avatar">
+        <div class="flex lg:items-end flex-row ss:flex-col lg:flex-row ss:items-start">
+          <img [src]="translate.getImgSrc(firstElement()?.main_image)" alt="" />
+          <div class="avatar__info">
+            <h2 class="__name helvetica-roman pb-0">
+              {{ translate.getTranslation(firstElement()?.name) }}
+            </h2>
+            <span class="__description helvetica-light" [innerHTML]="translate.getTranslation(firstElement()?.content)">
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- } -->
+    <div class="slider__side flex items-center">
+      <div class="flex flex-col items-center">
+        <img class="slides__img" src="../../../../assets/img/about/slides.png" alt="" />
+        <span class="slides__text helvetica-roman">{{translate.getTranslation(apiService?.langStrings?.team)}}</span>
+      </div>
+      <div class="slides__block flex items-stretch">
+        @for ( item of data(); track item ; ) {
+        <div class="slide__items flex items-end">
+          <img [src]="translate.getImgSrc(item?.main_image)" alt="" />
+          <div class="slide__info flex flex-col justify-between h-full pl-4">
+            <span class="slide__index helvetica-roman">0{{ item?.id }}</span>
+            <div class="flex flex-col">
+              <h3 class="__name mt-1.5 block couturier-Regular pb-0">
+                {{ translate.getTranslation(item?.position) }}
+              </h3>
+              <p class="__description helvetica-roman">
+                <!-- {{ item.position }} -->
+                {{ translate.getTranslation(item?.name) }}
+              </p>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

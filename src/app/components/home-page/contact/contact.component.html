@@ -1,0 +1,12 @@
+<button class="btn btn-secondary helvetica-roman ss:hidden md:block whitespace-nowrap"
+    (click)="service.toggleOpen(true)">
+    {{translationService.getTranslation(apiService?.langStrings?.contact_us)}}</button>
+
+<div class="social__items ss:flex md:hidden __black" (click)="service.toggleOpen(true)">
+    <a class="__up">
+        [{{translationService.getTranslation(apiService?.langStrings?.contact_us)}}]
+    </a>
+    <a class="__down">
+        [{{translationService.getTranslation(apiService?.langStrings?.contact_us)}}]
+    </a>
+</div>

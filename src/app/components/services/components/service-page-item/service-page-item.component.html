@@ -1,0 +1,21 @@
+<div class="relative">
+    <div class="scrollefect-block" [appTrackScroll]="elementTop" [appTrackScrollBottom]="(scrollThresholdBottom)"
+        [collapseClass]="activeClass" [class.anim-block]="activeClass !== 'compress'">
+        <div class="block__item flex center">
+            <div class="__left flex flex-col w-3/6">
+                <div>
+                    <h3 class="title pb-0 helvetica-roman"><strong>{{translate.getTranslation(data()?.title)}}
+                        </strong></h3>
+                    <div class="text helvetica-light" [innerHTML]="translate.getTranslation(data()?.content)"></div>
+
+                    <button (click)="service.toggleOpen(true)"
+                        class="btn btn-secondary helvetica">{{translate.getTranslation(data()?.button_text)}}</button>
+                </div>
+
+            </div>
+            <div class="__right w-3/6">
+                <img [src]="data()?.main_image" alt="">
+            </div>
+        </div>
+    </div>
+</div>

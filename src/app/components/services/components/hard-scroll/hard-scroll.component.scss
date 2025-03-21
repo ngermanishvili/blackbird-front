@@ -1,0 +1,238 @@
+@use "../../../../../assets/styles/responsive.scss" as m;
+
+.scrollefect-block {
+  // padding-top: 120px;
+  transition: 2s;
+  // max-height: 200vh;
+  // min-height: 100vh;
+
+  // display: flex;
+  // align-items: center;
+
+  position: sticky;
+  top: 0;
+}
+
+.scroll-container {
+  position: relative;
+  will-change: transform; // Performance optimization
+  margin-top: 30px;
+}
+
+.block__item {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  flex-direction: column;
+  display: flex;
+  position: relative;
+
+  //position:sticky;
+  //top:0;
+  .block-title {
+    font-size: 36px;
+    color: #0d0d0d;
+    line-height: 42px;
+    display: block;
+    //margin-bottom: 32px;
+    // transition: 0.3s;
+    //margin-top: 25px;
+
+    white-space: nowrap;
+    background: #fff;
+
+    &.header {
+      border-bottom: 1px solid;
+      padding: 20px 20px;
+      z-index: 70;
+      will-change: opacity; // Performance optimization
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease-in, visibility 0.3s ease;
+
+      &.sticky-active {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      @include m.respond-to(medium) {
+        padding-left: 0;
+      }
+    }
+
+    @include m.respond-to(large) {
+      font-size: 26px;
+    }
+  }
+
+  .block-content {
+    gap: 100px;
+    height: auto; // Allow natural height
+    min-height: 400px; // Higher minimum height
+    background-color: white;
+    margin-bottom: 60px; // Increase space between sections
+    position: relative;
+    align-items: center;
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    will-change: transform; // Performance optimization
+    transition: transform 0.4s ease, opacity 0.4s ease;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 100px;
+    }
+
+    @include m.respond-to(medium) {
+      min-height: 500px;
+      padding-bottom: 40px;
+      flex-direction: column;
+      gap: 40px;
+
+      &:last-child {
+        margin-bottom: 50px;
+      }
+    }
+
+    .__left,
+    .__right {
+      width: 100%;
+      transform: translateY(0);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .__right {
+      transform: translateY(0);
+
+      @include m.respond-to(medium) {
+        transform: translateY(0);
+      }
+    }
+
+    &.content-active {
+      @include m.respond-to(medium) {
+        .title {
+          margin-top: 8px !important;
+          font-size: 26px;
+        }
+      }
+
+      .__left {
+        transform: translateY(-30px);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        opacity: 0;
+        pointer-events: none;
+
+        @include m.respond-to(medium) {
+          transform: translateY(-20px);
+        }
+      }
+
+      .__right {
+        transform: translateY(30px);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        opacity: 0;
+        pointer-events: none;
+
+        @include m.respond-to(medium) {
+          transform: translateY(20px);
+        }
+      }
+    }
+
+    .__right {
+      margin-top: 0;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      @include m.respond-to(medium) {
+        margin-top: 0;
+      }
+    }
+
+    .__left {
+      .title {
+        font-size: 36px;
+        color: #0d0d0d;
+        line-height: 42px;
+        display: block;
+        margin-bottom: 32px;
+        transition: all 0.3s ease;
+        margin-top: 25px;
+        white-space: nowrap;
+        position: sticky;
+        top: 45px;
+
+        @include m.respond-to(large) {
+          font-size: 26px;
+        }
+
+        @include m.respond-to(medium) {
+          top: 60px;
+        }
+      }
+
+      .text {
+        font-size: 18px;
+        color: #484848;
+        line-height: 21px;
+        display: block;
+        margin-bottom: 32px;
+        letter-spacing: 0.16px;
+        line-height: 22px;
+      }
+
+      .btn {
+        margin-bottom: 30px;
+        display: block;
+      }
+    }
+
+    .text,
+    .btn {
+      transition: opacity 0.4s ease;
+      font-size: 18px;
+    }
+  }
+}
+
+.block-title.header {
+  z-index: 40;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease-in, visibility 0.4s ease;
+  /* Smooth transition for both */
+}
+
+.block-title.header.sticky-active {
+  visibility: visible;
+  opacity: 1;
+  //background-color: yellow; /* Change background when fully scrolled */
+  //color: red; /* Any other style changes */
+}
+
+.block-content-parent {
+  min-height: 450px; // Ensure content is tall enough for visibility
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  padding: 50px 0;
+  margin-bottom: 40px;
+
+  @include m.respond-to(medium) {
+    min-height: 70vh;
+    padding: 30px 0;
+  }
+}
+
+// Z-index fix
+.z-index-layer {
+  z-index: 1;
+}
