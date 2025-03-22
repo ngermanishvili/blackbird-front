@@ -4,9 +4,11 @@
         @for (item of data(); track $index) {
         <div class="flex items-center logos__items">
             @if (item?.logo) {
-            <img class="" [src]="translate.getImgSrc(item.logo)" [alt]="translate.getTranslation(item?.name)">
+            <img class="" [src]="translate.getImgSrc(item.logo)" [alt]="translate.getImageAlt(item, 'Partner logo')"
+                [title]="translate.getImageTitle(item, 'Partner')">
             }@else {
-            <img class="" [src]="translate.getImgSrc(item?.main_image)" [alt]="translate.getTranslation(item?.name)">
+            <img class="" [src]="translate.getImgSrc(item?.main_image)"
+                [alt]="translate.getImageAlt(item, 'Partner logo')" [title]="translate.getImageTitle(item, 'Partner')">
             }
         </div>
         }

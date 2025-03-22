@@ -19,8 +19,8 @@ export class ProjectsMobileComponent {
 
   isInview: boolean = false
   onInView(inView: boolean): void {
-    setTimeout(() => {
-      this.isInview = inView;
-    }, 4000);
+    if (inView) {
+      this.isInview = true;
+    }
   }
 }

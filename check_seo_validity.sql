@@ -1,0 +1,1 @@
+SELECT page, CASE WHEN JSON_VALID(meta) THEN 'Valid JSON' ELSE 'Invalid JSON' END AS meta_validity, CASE WHEN JSON_VALID(translations) THEN 'Valid JSON' ELSE 'Invalid JSON' END AS translations_validity FROM seo;

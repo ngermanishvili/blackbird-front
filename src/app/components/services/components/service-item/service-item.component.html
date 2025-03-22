@@ -2,7 +2,9 @@
     <div class="opt__dot helvetica-light"><span class="circle bg__{{data()?.slug}}"></span> Intro {{data()?.id}} </div>
     <div class="block__section">
         <div class="__left">
-            <img [src]="data()?.intro?.section_image" alt="">
+            <img [src]="data()?.intro?.section_image"
+                [alt]="translate.getImageAlt(data()?.intro, 'Service intro image')"
+                [title]="translate.getImageTitle(data()?.intro, 'Service introduction')">
         </div>
         <div class="__right flex flex-col">
             <h1 class="__title helvetica-roman">

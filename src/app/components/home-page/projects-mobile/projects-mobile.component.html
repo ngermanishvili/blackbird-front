@@ -1,16 +1,21 @@
 @if (data()) {
-<div appInView class="bg-black projects__content py-[100px]" (inView)="onInView($event)">
+<div appInView class="bg-black projects__content py-[100px]" [ngClass]="{'in-view': isInview}"
+    (inView)="onInView($event)">
     <div class="center flex-col justify-between relative opacity-0">
         <div class="top__side flex justify-between">
             <div class="left__side">
-                <img class="top__side__img" src="../../../../assets/img/top-plus.svg" alt="">
+                <img class="top__side__img" src="../../../../assets/img/top-plus.svg"
+                    alt="{{translate.getImageAlt(data(), 'Projects plus icon')}}"
+                    title="{{translate.getImageTitle(data(), 'Projects section')}}">
 
                 <!-- <div class="text__top text-white helvetica-roman">
                     {{data()[translate.currentLang()]?.number_1_text}}
                 </div> -->
             </div>
 
-            <img class="anim__top" src="../../../../assets/img/anim-top.svg" alt="">
+            <img class="anim__top" src="../../../../assets/img/anim-top.svg"
+                alt="{{translate.getImageAlt(data(), 'Projects animation')}}"
+                title="{{translate.getImageTitle(data(), 'Projects animation')}}">
         </div>
         <div class="middle__side text-white flex justify-center flex-col helvetica">
             <h2 class="whitespace-nowrap helvetica-roman block" [innerHtml]="data()[translate.currentLang()]?.title">
@@ -31,9 +36,13 @@
             </div>
         </div>
         <div class="bottom__side flex justify-between">
-            <img class="anim__bottom" src="../../../../assets/img/anim-bottom.svg" alt="">
+            <img class="anim__bottom" src="../../../../assets/img/anim-bottom.svg"
+                alt="{{translate.getImageAlt(data(), 'Projects bottom animation')}}"
+                title="{{translate.getImageTitle(data(), 'Projects bottom section')}}">
             <div class="left__side">
-                <img class="bottom__side__img" src="../../../../assets/img/bottom-plus.svg" alt="">
+                <img class="bottom__side__img" src="../../../../assets/img/bottom-plus.svg"
+                    alt="{{translate.getImageAlt(data(), 'Projects bottom icon')}}"
+                    title="{{translate.getImageTitle(data(), 'Projects bottom')}}">
                 <!-- <div class="text__bottom text-white helvetica-roman">
                     {{data()[translate.currentLang()]?.number_2_text}}
                 </div> -->

@@ -6,20 +6,25 @@
     </span>
   </h1>
   <div class="flex items-center flex-col mt-14 mb-9">
-    <img src="../../../../assets/img/navigations/nav-bird.png" alt="Nav Bird" />
+    <img src="../../../../assets/img/navigations/nav-bird.png" alt="Blackbird logo" title="Blackbird logo" />
     <h2 class="__title helvetica-roman pb-0">
       {{ ($data | async)?.data?.intro[translate.currentLang()]?.subtitle }}
     </h2>
   </div>
   <div class="__subtext text-center relative helvetica-light"
-       [innerHTML]="($data | async)?.data?.intro[translate.currentLang()]?.content"></div>
+    [innerHTML]="($data | async)?.data?.intro[translate.currentLang()]?.content"></div>
   <section class="mobile-scroll-section">
-    <img [src]="translate.img + ($data | async)?.data?.intro[translate.currentLang()]?.image" alt="Scrolling Image"/>
+    <img [src]="translate.img + ($data | async)?.data?.intro[translate.currentLang()]?.image"
+      [alt]="translate.getImageAlt(($data | async)?.data?.intro[translate.currentLang()], 'About intro image')"
+      [title]="translate.getImageTitle(($data | async)?.data?.intro[translate.currentLang()], 'About introduction')" />
   </section>
 </section>
 <section class="scroll-section" #scrollSection>
   <div class="scroll-element pb-20" #scrollElement>
-    <img [src]="translate.img + ($data | async)?.data?.intro[translate.currentLang()]?.image" alt="Scrolling Image" class="scrolling-image" />
+    <img [src]="translate.img + ($data | async)?.data?.intro[translate.currentLang()]?.image"
+      [alt]="translate.getImageAlt(($data | async)?.data?.intro[translate.currentLang()], 'About intro image')"
+      [title]="translate.getImageTitle(($data | async)?.data?.intro[translate.currentLang()], 'About introduction')"
+      class="scrolling-image" />
   </div>
 </section>
 

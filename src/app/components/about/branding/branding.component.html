@@ -4,13 +4,19 @@
         <div class="text__side">
             <span class="__view flex items-center cursor-pointer helvetica-light">
                 {{data()[translate.currentLang()]?.button_text}}
-                <img src="../../../../assets/img/success-cases/view.svg" alt="" />
+                <img src="../../../../assets/img/success-cases/view.svg"
+                    alt="{{translate.getImageAlt(data(), 'View icon')}}"
+                    title="{{translate.getImageTitle(data(), 'View more')}}">
             </span>
             <h2 class="__title couturier-Regular" [innerHtml]="data()[translate.currentLang()]?.title"></h2>
 
         </div>
-        <img class="heart__img" src="../../../../assets/img/heart.png" alt="">
-        <img class="__img" src="../../../../assets/img/black bird.png" alt="">
+        <img class="heart__img" src="../../../../assets/img/heart.png"
+            alt="{{translate.getImageAlt(data(), 'Heart image')}}"
+            title="{{translate.getImageTitle(data(), 'Heart icon')}}">
+        <img class="__img" src="../../../../assets/img/black bird.png"
+            alt="{{translate.getImageAlt(data(), 'Blackbird logo')}}"
+            title="{{translate.getImageTitle(data(), 'Blackbird')}}">
         <!-- <img class="__img" [src]="translate.getImgSrc(data()[translate.currentLang()]?.image)" alt="" /> -->
     </div>
 </section>

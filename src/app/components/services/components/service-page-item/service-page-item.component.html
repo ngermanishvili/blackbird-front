@@ -14,7 +14,8 @@
 
             </div>
             <div class="__right w-3/6">
-                <img [src]="data()?.main_image" alt="">
+                <img [src]="data()?.main_image" [alt]="translate.getImageAlt(data(), 'Service image')"
+                    [title]="translate.getImageTitle(data(), 'Service details')">
             </div>
         </div>
     </div>

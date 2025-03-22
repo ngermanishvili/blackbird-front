@@ -10,71 +10,44 @@
       <div class="email__side">
         <h1 class="__title helvetica-bold">
           {{
-            translate.getTranslation(
-              ($data | async)?.contact?.contact_form_title
-            )
+          translate.getTranslation(
+          ($data | async)?.contact?.contact_form_title
+          )
           }}
         </h1>
         <div class="email__form">
-          <input
-            placeholder="leave your email"
-            class="__input helvetica-ultra-light"
-            type="email"
-          />
+          <input placeholder="leave your email" class="__input helvetica-ultra-light" type="email" />
           <span class="__send helvetica-ultra-light">SEND</span>
         </div>
       </div>
       <div class="pt-8 pl-[7%]">
-        <video
-          #footerVideo
-          class="w-full"
-          autoplay
-          loop
-          muted
-          playsinline
-          [style.width.px]="1350"
-          [style.height.%]="100"
-          [style.display]="videoError ? 'none' : 'block'"
-        >
-          <source
-            src="../../../assets/animation/blackbird.mov"
-            type="video/quicktime"
-          />
-          <source
-            src="../../../assets/animation/blackbird.mov"
-            type="video/mp4"
-          />
+        <video #footerVideo class="w-full" autoplay loop muted playsinline [style.width.px]="1350"
+          [style.height.%]="100" [style.display]="videoError ? 'none' : 'block'">
+          <source src="../../../assets/animation/blackbird.mov" type="video/quicktime" />
+          <source src="../../../assets/animation/blackbird.mov" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
     </div>
   </div>
   } @else {
-  <div
-    class="footer__up"
-    [ngStyle]="{ 'background-size': backgroundSize }"
-    *ngIf="showfotterUpSide"
-  ></div>
+  <div class="footer__up" [ngStyle]="{ 'background-size': backgroundSize }" *ngIf="showfotterUpSide"></div>
   <!--      [ngClass]="{'': backgroundSize.slice(0 , -2) >= '400'}"-->
-  <div
-    class="footer bg-black pt-[70px]"
-    [ngClass]="{ rounded: backgroundSize.slice(0, -2) >= '400' }"
-  >
+  <div class="footer bg-black pt-[70px]" [ngClass]="{ rounded: backgroundSize.slice(0, -2) >= '400' }">
     <div class="top__side flex w-full justify-between center">
       <div class="left__side text-white">
         <p class="footer__Text leading-9 text-4xl max-w-lg helvetica-light">
-          {{ translate.getTranslation(($data | async)?.footer?.footer_text) }}
+          {{ footerData?.footer?.[translate.currentLang()]?.footer_text || translate.getTranslation(($data |
+          async)?.footer?.footer_text) || 'We are here waiting to listen to your queries and ideas' }}
         </p>
         <div class="footer__btns mt-[20px] flex">
-          <a
-            href="mailto:Blackbird@sales.ge"
-            class="btn dark-btn mr-[20px] helvetica-roman"
-            ><span class="point"></span>
-            {{ ($data | async)?.contact?.email }}
+          <a [href]="'mailto:' + (footerData?.contact?.email || ($data | async)?.contact?.email || 'info@blackbird.ge')"
+            class="btn dark-btn mr-[20px] helvetica-roman"><span class="point"></span>
+            {{ footerData?.contact?.email || ($data | async)?.contact?.email || 'info@blackbird.ge' }}
           </a>
-          <a href="tel:+995 111 212 3123" class="btn dark-btn helvetica-roman"
-            ><span class="point"></span>
-            {{ ($data | async)?.contact?.phone }}
+          <a [href]="'tel:' + (footerData?.contact?.phone || ($data | async)?.contact?.phone || '+995 598560609')"
+            class="btn dark-btn helvetica-roman"><span class="point"></span>
+            {{ footerData?.contact?.phone || ($data | async)?.contact?.phone || '+995 598560609' }}
           </a>
         </div>
       </div>
@@ -82,23 +55,20 @@
         <ul class="mr-[50px]">
           <li class="title helvetica-roman mb-[12px]">
             <span>
-              {{
-                translate.getTranslation(service?.langStrings?.services)
-                  | uppercase
-              }}
+              {{ footerData?.service?.langStrings?.[translate.currentLang()]?.services ||
+              serviceData?.langStrings?.[translate.currentLang()]?.services || serviceData?.langStrings?.en?.services ||
+              'SERVICES' | uppercase }}
             </span>
           </li>
-          @for ( item of ($services | async)?.data; track item ) {
+          @for ( item of ($services | async)?.data || []; track item ) {
           <li class="body__text helvetica-roman text-sm">
-            <a
-              [routerLink]="[
+            <a [routerLink]="[
                 '/services',
-                item?.slug,
-                item.id,
+                item?.slug || '',
+                item?.id || 0,
                 translate.currentLang()
-              ]"
-            >
-              {{ translate.getTranslation(item?.title) }}
+              ]">
+              {{ item?.title?.[translate.currentLang()] || item?.title?.en || 'Service' }}
             </a>
           </li>
           }
@@ -106,29 +76,29 @@
         <ul>
           <li class="title helvetica-roman mb-[12px]">
             <span>
-              {{
-                translate.getTranslation(service?.langStrings?.social_media)
-                  | uppercase
-              }}
+              {{ footerData?.service?.langStrings?.[translate.currentLang()]?.social_media ||
+              serviceData?.langStrings?.[translate.currentLang()]?.social_media ||
+              serviceData?.langStrings?.en?.social_media || 'SOCIAL MEDIA' | uppercase }}
             </span>
           </li>
           <li class="body__text helvetica-roman text-sm">
-            <a target="_blank" [href]="($data | async)?.social?.facebook">
+            <a target="_blank" [href]="footerData?.social?.facebook || ($data | async)?.social?.facebook || '#'">
               Facebook
             </a>
           </li>
           <li class="body__text helvetica-roman text-sm">
-            <a target="_blank" [href]="($data | async)?.social?.nstagram">
+            <a target="_blank" [href]="footerData?.social?.instagram || ($data | async)?.social?.instagram || '#'">
               Instagram
             </a>
           </li>
           <li class="body__text helvetica-roman text-sm">
-            <a target="_blank" [href]="($data | async)?.social?.youtube">
+            <a target="_blank" [href]="footerData?.social?.youtube || ($data | async)?.social?.youtube || '#'">
               Youtube
             </a>
           </li>
           <li class="body__text helvetica-roman text-sm">
-            <a target="_blank" [href]="($data | async)?.social?.Linkedin">
+            <a target="_blank"
+              [href]="footerData?.social?.linkedin || footerData?.social?.Linkedin || ($data | async)?.social?.Linkedin || '#'">
               Linkedin
             </a>
           </li>
@@ -137,29 +107,15 @@
     </div>
     <div class="bottom__side flex justify-between items-end center pb-[50px]">
       <div class="left__side">
-        <video
-          #footerVideo
-          class="w-auto"
-          autoplay
-          loop
-          muted
-          playsinline
-          [style.width.%]="auto"
-          [style.height.%]="auto"
-          [style.display]="videoError ? 'none' : 'block'"
-        >
-          <source
-            src="../../../assets/animation/blackbird.mov"
-            type="video/quicktime"
-          />
-          <source
-            src="../../../assets/animation/blackbird.mov"
-            type="video/mp4"
-          />
+        <video #footerVideo class="w-auto" autoplay loop muted playsinline [style.width.%]="auto"
+          [style.height.%]="auto" [style.display]="videoError ? 'none' : 'block'">
+          <source src="../../../assets/animation/blackbird.mov" type="video/quicktime" />
+          <source src="../../../assets/animation/blackbird.mov" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <p class="sub__text helvetica-roman">
-          {{ currentYear }} All rights reserved
+          {{ currentYear }} {{ footerData?.copyright?.[translate.currentLang()] || translate.getTranslation(($data |
+          async)?.copyright) || 'All rights reserved' }}
         </p>
       </div>
     </div>

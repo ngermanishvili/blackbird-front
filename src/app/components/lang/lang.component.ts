@@ -2,6 +2,21 @@ import { Component, Inject, inject, Input, OnInit, PLATFORM_ID, Renderer2 } from
 import { TranslationService } from '../core/lang.service';
 import { ActivatedRoute, InMemoryScrollingOptions, NavigationStart, Router } from '@angular/router';
 import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
+import { ApiService } from '../core/api-serice';
+
+interface LangItem {
+  lang: string;
+  text: string;
+}
+
+interface LanguageResponse {
+  success: boolean;
+  data: Array<{
+    code: string;
+    name: string;
+    label: string;
+  }>;
+}
 
 @Component({
   selector: 'app-lang',
@@ -14,16 +29,12 @@ export class LangComponent implements OnInit {
   @Input() dark: boolean = false;
   public translationService = inject(TranslationService);
   private router = inject(Router);
-  private renderer = inject(Renderer2)
+  private renderer = inject(Renderer2);
+  private apiService = inject(ApiService);
 
   langDrop = false;
-  langItems = [
-    { lang: 'ka', text: 'ქა' },
-    { lang: 'en', text: 'en' },
-    { lang: 'ru', text: 'ru' },
-  ];
-
-  langItemsConf = [...this.langItems];
+  langItems: LangItem[] = [];
+  langItemsConf: LangItem[] = [];
 
   isBrowser = false;
   constructor(
@@ -78,6 +89,17 @@ export class LangComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Fetch available languages from API
+    this.apiService.getLanguages().subscribe((response: LanguageResponse) => {
+      if (response.success && response.data) {
+        this.langItemsConf = response.data.map(lang => ({
+          lang: lang.code,
+          text: lang.label
+        }));
+        this.langConfigFunct();
+      }
+    });
+
     if (this.isBrowser) {
       this.router.events.subscribe((route) => {
         if (route instanceof NavigationStart) {

@@ -25,10 +25,13 @@
         </span>
       </div>
       @if (item?.branding_image) {
-      <img class="img__anim" [src]="translate.getImgSrc(item?.branding_image)" alt="">
+      <img class="img__anim" [src]="translate.getImgSrc(item?.branding_image)"
+        [alt]="translate.getImageAlt(item, 'Service branding image')"
+        [title]="translate.getImageTitle(item, 'Service branding')">
       }
       @if (item?.main_icon) {
-      <img class="img__anim" [src]="translate.getImgSrc(item?.main_icon_card)" alt="">
+      <img class="img__anim" [src]="translate.getImgSrc(item?.main_icon_card)"
+        [alt]="translate.getImageAlt(item, 'Service icon')" [title]="translate.getImageTitle(item, 'Service')">
       }
       <span class="__subtext block helvetica-light ">
         {{translate.getTranslation(item?.short_description)}} </span>

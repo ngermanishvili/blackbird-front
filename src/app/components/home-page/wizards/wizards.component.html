@@ -6,17 +6,19 @@
     <div class="carousel-container wizards-container" #carouselContainer>
         <div class="carousel" [ngStyle]="{'transform': transformStyle}" #carousel>
             <div *ngFor="let slide of data; let i = index" class="carousel-item">
-                <img [src]="translationService.getImgSrc(slide?.main_image)" [alt]="slide?.name" class="slide__img" />
+                <img [src]="translationService.getImgSrc(slide?.main_image)"
+                    [alt]="translationService.getImageAlt(slide, 'Team member image')"
+                    [title]="translationService.getImageTitle(slide, 'Team member')" class="slide__img" />
                 <div class="right__side flex flex-col justify-between pl-[16px]">
-                    <span class="helvetica-roman">{{i < 9 ? 0 : ''}}{{i +1}} </span>
-                    <div class="flex-col flex text__block">
-                        <span class="couturier-Regular __title">
-                            {{ translationService.getTranslation(slide?.position) }}
-                        </span>
-                        <h2 class="helvetica-roman __text pb-0">
-                            {{ translationService.getTranslation(slide?.name) }}
-                        </h2>
-                    </div>
+                    <span class="helvetica-roman">{{i < 9 ? 0 : '' }}{{i +1}} </span>
+                            <div class="flex-col flex text__block">
+                                <span class="couturier-Regular __title">
+                                    {{ translationService.getTranslation(slide?.position) }}
+                                </span>
+                                <h2 class="helvetica-roman __text pb-0">
+                                    {{ translationService.getTranslation(slide?.name) }}
+                                </h2>
+                            </div>
                 </div>
             </div>
         </div>

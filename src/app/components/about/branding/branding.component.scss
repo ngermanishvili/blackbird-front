@@ -80,6 +80,17 @@
       z-index: 10;
       transition: 0.5s;
       pointer-events: none;
+
+      @include m.respond-to(medium) {
+        right: 20px;
+        width: 180px;
+        height: auto;
+      }
+
+      @include m.respond-to(small) {
+        right: 10px;
+        width: 140px;
+      }
     }
 
     .heart__img {

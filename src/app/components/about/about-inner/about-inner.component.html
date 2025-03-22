@@ -62,7 +62,8 @@
                 </div>
 
                 <div class="big__img">
-                    <img src="{{activeBird?.branding_image}}" alt="">
+                    <img [src]="activeBird?.branding_image" [alt]="translate.getImageAlt(activeBird, 'Branding image')"
+                        [title]="translate.getImageTitle(activeBird, 'Branding')">
                 </div>
             </div>
         </div>

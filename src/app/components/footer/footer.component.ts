@@ -18,6 +18,7 @@ import {
   Renderer2,
   signal,
   ViewChild,
+  isDevMode,
 } from '@angular/core';
 import {
   Router,
@@ -29,6 +30,15 @@ import { filter, Observable, of } from 'rxjs';
 import { LangComponent } from '../lang/lang.component';
 import { TranslationService } from '../core/lang.service';
 import { ApiService } from '../core/api-serice';
+
+/**
+ * მხოლოდ დეველოპერულ რეჟიმში ლოგავს
+ */
+function devLog(message: string, ...data: any[]): void {
+  if (isDevMode()) {
+    console.log(`[DEV] ${message}`, ...data);
+  }
+}
 
 @Component({
   selector: 'app-footer',
@@ -65,6 +75,17 @@ export class FooterComponent {
   $services: Observable<any> = of([]);
   routelenght = 0;
   private lastUpdate = 0;
+  serviceData: any = {
+    langStrings: {
+      en: { services: 'SERVICES', social_media: 'SOCIAL MEDIA' },
+      ka: { services: 'სერვისები', social_media: 'სოციალური მედია' },
+      ru: { services: 'УСЛУГИ', social_media: 'СОЦИАЛЬНЫЕ СЕТИ' }
+    }
+  };
+  footerData: any;
+
+  // დებაგ რეჟიმის ფლაგი გადაყვანილია კომპონენტის პრივატულ თვისებაში
+  private isDebugMode = false;
 
   public translate = inject(TranslationService);
   private service = inject(ApiService);
@@ -77,6 +98,7 @@ export class FooterComponent {
     private ngZone: NgZone
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
+    this.isDebugMode = isDevMode();
   }
 
   // @HostListener("window:scroll", [])
@@ -152,14 +174,47 @@ export class FooterComponent {
           this.showfotterUpSide = true;
         }
       });
+
+    // Load data from services
     this.$data = this.service.getGeneralSettings();
     this.$services = this.service.getServices();
 
-    // if (this.isBrowser) {
-    //   window.addEventListener('scroll', () => {
-    //     requestAnimationFrame(() => this.updateBackgroundSize());
-    //   });
-    // }
+    // Get footer-specific data
+    this.service.getFooterData().subscribe(
+      response => {
+        // არ ვლოგავთ წარმატებულ მოთხოვნას, მხოლოდ შეცდომას
+        if (!response) {
+          console.error('No footer data received from API');
+          return;
+        }
+
+        this.footerData = response;
+
+        if (this.footerData.service && this.footerData.service.langStrings) {
+          this.serviceData.langStrings = this.footerData.service.langStrings;
+        }
+      },
+      error => {
+        console.error('Error fetching footer data:', error);
+      }
+    );
+
+    // Store service section titles from general settings as fallback
+    this.$data.subscribe(data => {
+      if (data && data.service && data.service.langStrings &&
+        (!this.serviceData.langStrings || !this.serviceData.langStrings.en)) {
+        this.serviceData.langStrings = data.service.langStrings;
+      }
+
+      if (!this.serviceData.langStrings || !this.serviceData.langStrings.en) {
+        this.serviceData.langStrings = {
+          en: { services: 'SERVICES', social_media: 'SOCIAL MEDIA' },
+          ka: { services: 'სერვისები', social_media: 'სოციალური მედია' },
+          ru: { services: 'УСЛУГИ', social_media: 'СОЦИАЛЬНЫЕ СЕТИ' }
+        };
+      }
+    });
+
     if (this.isBrowser) {
       this.ngZone.runOutsideAngular(() => {
         window.addEventListener('scroll', this.updateBackgroundSize.bind(this));
@@ -186,7 +241,7 @@ export class FooterComponent {
         const footerScrollPercentage = Math.min(
           1,
           (scrollTop + windowHeight - documentHeight + footerHeight) /
-            footerHeight
+          footerHeight
         );
 
         // Linear interpolation for smoother size transition
@@ -201,7 +256,7 @@ export class FooterComponent {
   ngAfterViewInit(): void {
     if (this.footerVideo) {
       this.footerVideo.nativeElement.addEventListener('error', (e) => {
-        console.error('Video loading error:', e);
+        // ვიდეოს შეცდომას აღარ ვლოგავთ ტერმინალში
         this.videoError = true;
       });
     }

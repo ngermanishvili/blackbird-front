@@ -96,6 +96,10 @@ export class AppComponent {
     }
   }
 
+  scrollResetFunc(): 'enabled' | 'disabled' {
+    return this.translateService.scrollReset();
+  }
+
   ngOnInit(): void {
     if (this.isBrowser) {
       this.zone.runOutsideAngular(() => {
@@ -111,19 +115,84 @@ export class AppComponent {
     }
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (event.url === '/home') {
-          this.titleService.setTitle('blackbird');
-          this.metaService.updateTag({ name: 'blackbird' });
+        // Extract the current page from URL
+        let currentPage = 'home';
+
+        if (event.url === '/home' || event.url === '/') {
+          currentPage = 'home';
         } else if (event.url === '/about') {
-          this.titleService.setTitle('about-blackbird');
-          this.metaService.updateTag({ name: 'about blackbird' });
+          currentPage = 'about';
         } else if (event.url === '/contact') {
-          this.titleService.setTitle('contact-blackbird');
-          this.metaService.updateTag({ name: 'blackbird contact' });
+          currentPage = 'contact';
         } else if (event.url.includes('services')) {
-          this.titleService.setTitle('blackbird-services');
-          this.metaService.updateTag({ name: 'blackbird services' });
+          currentPage = 'services';
+        } else if (event.url.includes('work')) {
+          currentPage = 'case-studies';
         }
+
+        // Get SEO data for the current page
+        this.apiService.getSeoData(currentPage).subscribe(response => {
+          if (response.success && response.data) {
+            const currentLang = this.translateService.currentLang();
+
+            // Check if translations exist for current language, otherwise use meta
+            let seoData;
+            if (response.data.translations &&
+              response.data.translations[currentLang] &&
+              Object.keys(response.data.translations[currentLang]).length > 0) {
+              seoData = response.data.translations[currentLang];
+            } else if (response.data.meta && Object.keys(response.data.meta).length > 0) {
+              seoData = response.data.meta;
+            } else {
+              console.warn('No SEO data available for', currentPage);
+              return;
+            }
+
+            // Set title
+            if (seoData.title) {
+              this.titleService.setTitle(seoData.title);
+            }
+
+            // Set meta tags
+            if (seoData.description) {
+              this.metaService.updateTag({ name: 'description', content: seoData.description });
+            }
+
+            if (seoData.keywords) {
+              this.metaService.updateTag({ name: 'keywords', content: seoData.keywords });
+            }
+
+            // Set Open Graph meta tags
+            if (seoData.og_title) {
+              this.metaService.updateTag({ property: 'og:title', content: seoData.og_title });
+            }
+
+            if (seoData.og_description) {
+              this.metaService.updateTag({ property: 'og:description', content: seoData.og_description });
+            }
+
+            if (seoData.og_image) {
+              this.metaService.updateTag({ property: 'og:image', content: seoData.og_image });
+            }
+
+            // Set Twitter Card meta tags if present
+            if (seoData.twitter_card) {
+              this.metaService.updateTag({ name: 'twitter:card', content: seoData.twitter_card });
+            }
+
+            if (seoData.twitter_title) {
+              this.metaService.updateTag({ name: 'twitter:title', content: seoData.twitter_title });
+            }
+
+            if (seoData.twitter_description) {
+              this.metaService.updateTag({ name: 'twitter:description', content: seoData.twitter_description });
+            }
+
+            if (seoData.twitter_image) {
+              this.metaService.updateTag({ name: 'twitter:image', content: seoData.twitter_image });
+            }
+          }
+        });
       }
     });
     if (this.isBrowser) {
