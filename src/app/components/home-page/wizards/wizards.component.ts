@@ -66,6 +66,8 @@ export class WizardsComponent {
   isBrowser: boolean = false;
   private animationFrameId: number | null = null;
   private loaded = false;
+  itemWidth: number = 0;
+  slideStep: number = 300; // The distance to move on arrow click
 
   constructor(@Inject(PLATFORM_ID) platformId: Object, private ngZone: NgZone) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -74,14 +76,9 @@ export class WizardsComponent {
   ngOnInit(): void {
     if (this.isBrowser && this.pageAlive) {
       this.duplicateProducts();
-      // setTimeout(() => {
-      // }, 1000);
-      // if (this.loaded) {
-      // }
       this.checkLoadedAndType();
 
       this.ngZone.runOutsideAngular(() => {
-        // window.addEventListener('resize', this.onResize.bind(this));
         window.addEventListener('scroll', this.onWindowScroll.bind(this));
       });
     }
@@ -106,7 +103,6 @@ export class WizardsComponent {
     }
   }
 
-  // @HostListener('window:scroll', [])
   onWindowScroll() {
     if (this.isBrowser) {
       setTimeout(() => {
@@ -124,27 +120,64 @@ export class WizardsComponent {
     }
     await this.carousel?.nativeElement?.offsetWidth;
     if (this.carouselContainer && this.carousel?.nativeElement?.offsetWidth) {
-      const step = () => {
-        if (!this.carousel?.nativeElement) {
-          return;
-        }
-        this.currentPosition -= this.animationSpeed;
-        this.transformStyle = `translateX(${this.currentPosition}px)`;
-        const carouselWidth = this.carousel.nativeElement.offsetWidth;
+      // Calculate item width for navigation
+      if (this.carousel.nativeElement.children.length > 0) {
+        this.itemWidth = this.carousel.nativeElement.children[0].offsetWidth;
+      }
 
-        if (Math.abs(this.currentPosition) >= carouselWidth / 2) {
-          // this.currentPosition = 0;
-          this.duplicateProducts();
-        }
-        if (this.isBrowser) {
-          this.animationFrameId = requestAnimationFrame(step);
-        }
-      };
+      // Start auto-scrolling
+      this.continueAutoplay();
+    }
+  }
 
+  continueAutoplay() {
+    const step = () => {
+      if (!this.carousel?.nativeElement) {
+        return;
+      }
+      this.currentPosition -= this.animationSpeed;
+      this.transformStyle = `translateX(${this.currentPosition}px)`;
+      const carouselWidth = this.carousel.nativeElement.offsetWidth;
+
+      if (Math.abs(this.currentPosition) >= carouselWidth / 2) {
+        this.duplicateProducts();
+      }
       if (this.isBrowser) {
         this.animationFrameId = requestAnimationFrame(step);
       }
+    };
+
+    if (this.isBrowser) {
+      if (this.animationFrameId) {
+        cancelAnimationFrame(this.animationFrameId);
+      }
+      this.animationFrameId = requestAnimationFrame(step);
     }
+  }
+
+  navigateCarousel(direction: 'prev' | 'next') {
+    // Temporarily pause autoplay
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+
+    // Calculate the step based on itemWidth or use the default slideStep
+    const moveDistance = this.itemWidth > 0 ? this.itemWidth : this.slideStep;
+
+    if (direction === 'prev') {
+      this.currentPosition += moveDistance;
+    } else {
+      this.currentPosition -= moveDistance;
+    }
+
+    // Apply the transform
+    this.transformStyle = `translateX(${this.currentPosition}px)`;
+
+    // Resume autoplay after a brief pause
+    setTimeout(() => {
+      this.continueAutoplay();
+    }, 1000);
   }
 
   duplicateProducts(): void {
